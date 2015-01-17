@@ -9,7 +9,7 @@
 
 				<div class="panel-body">
 					@unless (Auth::guest())
-						You are logged in!<br><br>
+						You are logged in! Just checkin to see if deployment works. - Daniel<br><br>
 
 						<div class="list-group">
 							<a href="#" class="list-group-item active">
