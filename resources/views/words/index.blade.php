@@ -63,7 +63,7 @@
 		var list = $('#list');
 		var waitmsg = $('#waitmsg');
 
-		$('#searchbar').on('keyup', function() 
+		$('#searchbar').bindWithDelay('input propertychange paste', function() 
 		{
 			var value = $(this).val();
 			$('.removeme').remove();
@@ -78,6 +78,7 @@
 					data: { value: value, _token: token },
 					success: function(words) 
 					{
+						count = 0;
 						for (var i = 0; i <= words.length -1; i++) 
 						{
 							var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
@@ -96,8 +97,10 @@
 							row.find('.type').html(words[i]['type']);
 
 							row.appendTo($('#list'));
+							count++;
 						};
 						waitmsg.hide();
+						console.log(count);
 					}
 				});
 			}
@@ -105,7 +108,7 @@
 			{
 				$('#words_table').slideUp();
 			}
-		});
+		}, 200);
 	});
 </script>
 @endsection
