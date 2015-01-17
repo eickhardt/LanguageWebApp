@@ -19,11 +19,11 @@
 									<tr class="active">
 										<th>Row</th>
 										<th>Type</th>
-										<th>French</th>
+										<th>Danish</th>
 										<th>English</th>
+										<th>French</th>
 										<th>Polish</th>
 										<th>Spanish</th>
-										<th>Danish</th>
 										<th>Time PL</th>
 										<th>Time DK</th>
 										<th>Time ES</th>
@@ -32,11 +32,11 @@
 								<tr>
 									<td>{{ $word->id }}</td>
 									<td>{{ $word->type }}</td>
-									<td>{{ $word->FR }}</td>
+									<td>{{ $word->DK }}</td>
 									<td>{{ $word->EN }}</td>
+									<td>{{ $word->FR }}</td>
 									<td>{{ $word->PL }}</td>
 									<td>{{ $word->ES }}</td>
-									<td>{{ $word->DK }}</td>
 									<td>{{ $word->TSPL }}</td>
 									<td>{{ $word->TSDK }}</td>
 									<td>{{ $word->TSES }}</td>
