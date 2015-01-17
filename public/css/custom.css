@@ -1,0 +1,11 @@
+.inline {
+	display: inline;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.pagination {
+	margin: 0;
+}
