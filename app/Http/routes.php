@@ -34,7 +34,7 @@ Route::controllers([
 
 $router->bind('words', function($id) 
 {
-	return App\Word::where('ID', $id)->first();
+	return App\Word::where('id', $id)->first();
 });
 
 $router->resource('words', 'WordsController', [
@@ -49,7 +49,6 @@ $router->resource('words', 'WordsController', [
 	]
 ]);
 
-// get('words', 'WordsController@index');
-// get('words/{word}', 'WordsController@show');
-// get('words/{word}/edit', 'WordsController@edit');
-// patch('words/{word}', 'WordsController@update');
+$router->post('words/search', 
+	['as' => 'word_search_path', 'uses' => 'WordsController@search']
+);

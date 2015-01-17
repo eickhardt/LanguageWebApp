@@ -9,3 +9,11 @@
 .pagination {
 	margin: 0;
 }
+
+#waitmsg {
+	display: none;
+}
+
+#words_table {
+	display: none;
+}

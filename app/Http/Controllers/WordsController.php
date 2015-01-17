@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Word;
 use Session;
+use DB;
+use Input;
 
 class WordsController extends Controller {
 
@@ -27,7 +29,7 @@ class WordsController extends Controller {
 	 */
 	public function index()
 	{
-		$words = $this->word->get();
+		$words = $this->word->take(50)->get();
 
 		return view('words.index', compact('words'));
 	}
@@ -138,8 +140,32 @@ class WordsController extends Controller {
 		$oldword = $word->FR;
 		$word->delete();
 
-		Session::flash('success', 'The word ' .$oldword. ' was deleted.');
+		Session::flash('success', "The word '" .$oldword. "' was deleted.");
 		return redirect('words');
 	}
 
+	/**
+	 * Search for a word.
+	 */
+	public function search()
+	{
+		if (Input::has('value'))
+		{
+			$string = Input::get('value');
+			$string = "%{$string}%";
+
+			$words = Word::where('FR', 'LIKE', $string)
+				->orWhere('EN', 'LIKE', $string)
+				->orWhere('DK', 'LIKE', $string)
+				->orWhere('PL', 'LIKE', $string)
+				->orWhere('ES', 'LIKE', $string)
+				->orWhere('EN', 'LIKE', $string)
+				->orWhere('type', 'LIKE', $string)
+				->orWhere('id', 'LIKE', $string)
+				->get();
+
+			return $words->toArray();
+		}
+		return false;
+	}
 }

@@ -7,32 +7,17 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2>
-						<a href="/words">Words</a> / Index
+						<a href="/words">Words</a> / Index <span id="waitmsg">/ Wait a second...</span>
 					</h2>
 				</div>
 				<div id="words" class="panel-body">
 					<button onclick="document.location='{{ route('word_create_path') }}'" type="submit" class="btn btn-primary">
 						+ Create new
-					</button>
-					<button class="sort btn btn-primary" data-sort="FR">
-					    # Sort by French
-					</button>
-					<button class="sort btn btn-primary" data-sort="EN">
-					    # Sort by English
-					</button>
-					<button class="sort btn btn-primary" data-sort="PL">
-					    # Sort by Polish
-					</button>
-					<button class="sort btn btn-primary" data-sort="ES">
-					    # Sort by Spanish
-					</button>
-					<button class="sort btn btn-primary" data-sort="DK">
-					    # Sort by Danish
 					</button><br><br>
 
-					<input class="search form-control" placeholder="Search" /><br>
+					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
 
-					<div class="panel panel-default">
+					<div id="words_table" class="panel panel-default">
 						<table class="table table-hover table-bordered table-striped">
 							<thead>
 								<tr class="info">
@@ -45,22 +30,19 @@
 									<th>Spanish</th>
 								</tr>
 							</thead>
-							<tbody class="list">
-								@foreach ($words as $word)
-									<tr onclick="document.location = '{{ route('word_path', $word->id) }}'">
-										<td class="clickable id">{{ $word->id }}</td>
-										<td class="clickable type">{{ $word->type }}</td>
-										<td title="{{ $word->TSDK }}" class="clickable DK">{{ $word->DK }}</td>
-										<td class="clickable EN">{{ $word->EN }}</td>
-										<td class="clickable FR">{{ $word->FR }}</td>
-										<td title="{{ $word->TSPL }}" class="clickable PL">{{ $word->PL }}</td>
-										<td title="{{ $word->TSES }}" class="clickable ES">{{ $word->ES }}</td>
-									</tr>
-								@endforeach
+							<tbody id="list">
+								<tr id="cloneme" style="display:none;">
+									<td class="clickable id"></td>
+									<td class="clickable type"></td>
+									<td title="" class="clickable DK"></td>
+									<td class="clickable EN"></td>
+									<td class="clickable FR"></td>
+									<td title="" class="clickable PL"></td>
+									<td title="" class="clickable ES"></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
-					<ul class="pagination"></ul>
 				</div>
 			</div>
 		</div>
@@ -69,19 +51,61 @@
 @endsection
 
 @section('scripts')
-<!-- Searchable list with List.js -->
-<script src="/js/list.min.js"></script>
-<script src="http://listjs.com/no-cdn/list.pagination.js"></script>
-<script type="text/javascript">
-	$(function() {
-	    // console.log( "ready!" );
-		var options = {
-		  valueNames: [ 'DK', 'FR', 'EN', 'PL', 'ES', 'type', 'id' ],
-		  page: 200,
-		  plugins: [ ListPagination([]) ]
-		};
 
-		var wordList = new List('words', options);
+<!-- Searchable list -->
+<script type="text/javascript">
+	$(function() 
+	{
+		var method = 'POST';
+		var url = '/words/search';
+		var _globalObj = <?= json_encode(array('_token'=> csrf_token())) ?>;
+		var token = _globalObj._token;
+		var list = $('#list');
+		var waitmsg = $('#waitmsg');
+
+		$('#searchbar').on('keyup', function() 
+		{
+			var value = $(this).val();
+			$('.removeme').remove();
+
+			if (value.length > 1)
+			{
+				$('#words_table').show();
+				waitmsg.show();
+				$.ajax({
+					type: method,
+					url: url,
+					data: { value: value, _token: token },
+					success: function(words) 
+					{
+						for (var i = 0; i <= words.length -1; i++) 
+						{
+							var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
+
+							row.addClass('removeme');
+
+							row.find('.id').html(words[i]['id']);
+							row.find('.DK').html(words[i]['DK']);
+							row.find('.DK').attr('title', words[i]['TSDK']);
+							row.find('.FR').html(words[i]['FR']);
+							row.find('.PL').html(words[i]['PL']);
+							row.find('.PL').attr('title', words[i]['TSPL']);
+							row.find('.ES').html(words[i]['ES']);
+							row.find('.ES').attr('title', words[i]['TSES']);
+							row.find('.EN').html(words[i]['EN']);
+							row.find('.type').html(words[i]['type']);
+
+							row.appendTo($('#list'));
+						};
+						waitmsg.hide();
+					}
+				});
+			}
+			else
+			{
+				$('#words_table').slideUp();
+			}
+		});
 	});
 </script>
 @endsection
