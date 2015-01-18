@@ -16,32 +16,33 @@
 					</button><br><br>
 
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
-
-					<div id="words_table" class="panel panel-default">
-						<table class="table table-hover table-bordered table-striped">
-							<thead>
-								<tr class="info">
-									<th>Row</th>
-									<th>Type</th>
-									<th>Danish</th>
-									<th>English</th>
-									<th>French</th>
-									<th>Polish</th>
-									<th>Spanish</th>
-								</tr>
-							</thead>
-							<tbody id="list">
-								<tr id="cloneme" style="display:none;">
-									<td class="clickable id"></td>
-									<td class="clickable type"></td>
-									<td title="" class="clickable DK"></td>
-									<td class="clickable EN"></td>
-									<td class="clickable FR"></td>
-									<td title="" class="clickable PL"></td>
-									<td title="" class="clickable ES"></td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="table-responsive"> 
+						<div id="words_table" class="panel panel-default">
+							<table class="table table-hover table-bordered table-striped">
+								<thead>
+									<tr class="info">
+										<th>Row</th>
+										<th>Type</th>
+										<th>Danish</th>
+										<th>English</th>
+										<th>French</th>
+										<th>Polish</th>
+										<th>Spanish</th>
+									</tr>
+								</thead>
+								<tbody id="list">
+									<tr id="cloneme" style="display:none;">
+										<td class="clickable id"></td>
+										<td class="clickable type"></td>
+										<td title="" class="clickable DK"></td>
+										<td class="clickable EN"></td>
+										<td class="clickable FR"></td>
+										<td title="" class="clickable PL"></td>
+										<td title="" class="clickable ES"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
