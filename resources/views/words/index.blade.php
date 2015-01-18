@@ -16,8 +16,8 @@
 					</button><br><br>
 
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
-					<div class="table-responsive"> 
-						<div id="words_table" class="panel panel-default">
+					<div id="words_table" class="table-responsive"> 
+						<div class="panel panel-default">
 							<table class="table table-hover table-bordered table-striped">
 								<thead>
 									<tr class="info">
