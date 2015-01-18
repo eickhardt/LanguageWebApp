@@ -68,7 +68,7 @@
 				<div class="col-md-10 col-md-offset-1">
 						
 					<div class="alert alert-success">
-						<strong>Viola!</strong> - {{ Session::get('success') }} <br>
+						<strong>Voila!</strong> - {{ Session::get('success') }} <br>
 					</div>
 						
 				</div>
