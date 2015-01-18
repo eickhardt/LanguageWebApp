@@ -62,51 +62,60 @@
 		var _globalObj = <?= json_encode(array('_token'=> csrf_token())) ?>;
 		var token = _globalObj._token;
 		var list = $('#list');
-		var waitmsg = $('#waitmsg');
+
+		if ($('#searchbar').val().length > 1)
+		{
+			var value = $('#searchbar').val();
+			updateList(value, token, method, url);
+		}
 
 		$('#searchbar').bindWithDelay('input propertychange paste', function() 
 		{
-			var value = $(this).val();
-			$('.removeme').remove();
-
-			if (value.length > 1)
-			{
-				$('#words_table').show();
-				waitmsg.show();
-				$.ajax({
-					type: method,
-					url: url,
-					data: { value: value, _token: token },
-					success: function(words) 
-					{
-						for (var i = 0; i <= words.length -1; i++) 
-						{
-							var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
-
-							row.addClass('removeme');
-
-							row.find('.id').html(words[i]['id']);
-							row.find('.DK').html(words[i]['DK']);
-							row.find('.DK').attr('title', words[i]['TSDK']);
-							row.find('.FR').html(words[i]['FR']);
-							row.find('.PL').html(words[i]['PL']);
-							row.find('.PL').attr('title', words[i]['TSPL']);
-							row.find('.ES').html(words[i]['ES']);
-							row.find('.ES').attr('title', words[i]['TSES']);
-							row.find('.EN').html(words[i]['EN']);
-							row.find('.type').html(words[i]['type']);
-
-							row.appendTo($('#list'));
-						};
-						waitmsg.hide();
-					}
-				});
-			}
-			else
-			{
-				$('#words_table').slideUp();
-			}
+			var value = $('#searchbar').val();
+			updateList(value, token, method, url);
 		}, 200);
 	});
+
+	function updateList(value, token, method, url) {
+		$('.removeme').remove();
+
+		if (value.length > 1)
+		{
+			$('#words_table').show();
+			$('#waitmsg').show();
+			$.ajax({
+				type: method,
+				url: url,
+				data: { value: value, _token: token },
+				success: function(words) 
+				{
+					for (var i = 0; i <= words.length -1; i++) 
+					{
+						var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
+
+						row.addClass('removeme');
+
+						row.find('.id').html(words[i]['id']);
+						row.find('.DK').html(words[i]['DK']);
+						row.find('.DK').attr('title', words[i]['TSDK']);
+						row.find('.FR').html(words[i]['FR']);
+						row.find('.PL').html(words[i]['PL']);
+						row.find('.PL').attr('title', words[i]['TSPL']);
+						row.find('.ES').html(words[i]['ES']);
+						row.find('.ES').attr('title', words[i]['TSES']);
+						row.find('.EN').html(words[i]['EN']);
+						row.find('.type').html(words[i]['type']);
+
+						row.appendTo($('#list'));
+					};
+					$('#waitmsg').hide();
+				}
+			});
+		}
+		else
+		{
+			$('#words_table').slideUp();
+		}
+	}
 </script>
 @endsection
