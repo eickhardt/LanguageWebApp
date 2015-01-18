@@ -23,11 +23,11 @@
 									<tr class="info">
 										<th>Row</th>
 										<th>Type</th>
-										<th>Danish</th>
-										<th>English</th>
-										<th>French</th>
-										<th>Polish</th>
-										<th>Spanish</th>
+										<th><img src="/img/flags/Denmark.png"></th>
+										<th><img src="/img/flags/USA.png"></th>
+										<th><img src="/img/flags/France.png"></th>
+										<th><img src="/img/flags/Poland.png"></th>
+										<th><img src="/img/flags/Spain.png"></th>
 									</tr>
 								</thead>
 								<tbody id="list">

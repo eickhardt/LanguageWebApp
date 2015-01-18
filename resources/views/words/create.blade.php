@@ -22,35 +22,35 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">French</label>
-							<div class="col-md-6">
-								{!! Form::text('FR', NULL, ['class' => 'form-control']) !!}
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">English</label>
-							<div class="col-md-6">
-								{!! Form::text('EN', NULL, ['class' => 'form-control']) !!}
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Danish</label>
+							<label class="col-md-4 control-label"><img src="/img/flags/Denmark.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('DK', NULL, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Polish</label>
+							<label class="col-md-4 control-label"><img src="/img/flags/USA.png"></label>
+							<div class="col-md-6">
+								{!! Form::text('EN', NULL, ['class' => 'form-control']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><img src="/img/flags/France.png"></label>
+							<div class="col-md-6">
+								{!! Form::text('FR', NULL, ['class' => 'form-control']) !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><img src="/img/flags/Poland.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('PL', NULL, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Spanish</label>
+							<label class="col-md-4 control-label"><img src="/img/flags/Spain.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('ES', NULL, ['class' => 'form-control']) !!}
 							</div>
