@@ -24,8 +24,8 @@
 										<th>French</th>
 										<th>Polish</th>
 										<th>Spanish</th>
-										<th>Time PL</th>
 										<th>Time DK</th>
+										<th>Time PL</th>
 										<th>Time ES</th>
 									</tr>
 								</thead>
@@ -37,8 +37,8 @@
 									<td>{{ $word->FR }}</td>
 									<td>{{ $word->PL }}</td>
 									<td>{{ $word->ES }}</td>
-									<td>{{ $word->TSPL }}</td>
 									<td>{{ $word->TSDK }}</td>
+									<td>{{ $word->TSPL }}</td>
 									<td>{{ $word->TSES }}</td>
 								</tr>
 							</table>

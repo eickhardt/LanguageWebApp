@@ -91,7 +91,9 @@
 			$('.alert-container').slideDown();
 			$('.alert-container').on('click', function() {
 				$(this).slideUp();
-			})
+			});
+			$("input").focus(function() { $(this).select(); } );
+			$('input').mouseup(function(e) { return false; });
 		});
 	</script>
 

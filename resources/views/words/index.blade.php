@@ -78,7 +78,6 @@
 					data: { value: value, _token: token },
 					success: function(words) 
 					{
-						count = 0;
 						for (var i = 0; i <= words.length -1; i++) 
 						{
 							var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
@@ -97,10 +96,8 @@
 							row.find('.type').html(words[i]['type']);
 
 							row.appendTo($('#list'));
-							count++;
 						};
 						waitmsg.hide();
-						console.log(count);
 					}
 				});
 			}
