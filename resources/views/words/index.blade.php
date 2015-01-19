@@ -13,10 +13,10 @@
 				</div>
 				<div id="words" class="panel-body">
 					<button onclick="document.location='{{ route('word_create_path') }}'" type="submit" class="btn btn-primary">
-						+ Create new
+						<span class="glyphicon glyphicon-plus-sign"></span> Create new
 					</button>
 					<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
-						? Random word
+						<span class="glyphicon glyphicon-question-sign"></span> Random word
 					</button><br><br>
 
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>

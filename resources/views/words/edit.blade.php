@@ -80,7 +80,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									! Update
+									<span class="glyphicon glyphicon-ok-sign"></span> Update
 								</button>
 							</div>
 						</div>
@@ -89,15 +89,15 @@
 					{!! Form::open(['route' => ['word_delete_path', $word->id], 'method' => 'DELETE', 'class' => 'form-horizontal', 'id' => 'delete_word_form']) !!}
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<button id="delete_word_btn" type="submit" class="btn btn-primary">
-									- Delete
+								<button id="delete_word_btn" type="submit" class="btn btn-primary btn-danger">
+									<span class="glyphicon glyphicon-remove-sign"></span> Delete
 								</button>
 							</div>
 						</div>
 					{!! Form::close() !!}<br>
 
 					<button onclick="document.location='{{ route('words_path') }}'" type="submit" class="btn btn-primary">
-						< Back to words
+						<span class="glyphicon glyphicon-arrow-left"></span> Back to words
 					</button>
 				</div>
 			</div>
@@ -111,14 +111,14 @@
 
 	$(function() {
 
+		$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
 		var focus = '{{ Input::get('focus') }}';
 
 		if (focus)
 		{
 			$( '.' + focus ).focus();
 		}
-
-		$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 		$( "#delete_word_btn" ).on('click', function(e) 
 		{

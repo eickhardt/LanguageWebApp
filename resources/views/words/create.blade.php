@@ -80,14 +80,14 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									! Create
+									<span class="glyphicon glyphicon-plus-sign"></span> Create
 								</button>
 							</div>
 						</div>
 					{!! Form::close() !!}
 
 					<button onclick="document.location='{{ route('words_path') }}'" type="submit" class="btn btn-primary">
-						< Back to words
+						<span class="glyphicon glyphicon-arrow-left"></span> Back to words
 					</button>
 				</div>
 			</div>

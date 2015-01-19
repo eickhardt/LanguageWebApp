@@ -135,7 +135,7 @@ class WordsController extends Controller {
 		$word->save();
 
 		Session::flash('success', "A new word '".$word->FR."' was created.");
-		return redirect()->route('words_edit_path', $word->id);
+		return redirect()->route('word_edit_path', $word->id);
 	}
 
 	/**
