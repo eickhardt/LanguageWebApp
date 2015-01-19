@@ -29,9 +29,7 @@ class WordsController extends Controller {
 	 */
 	public function index()
 	{
-		$words = $this->word->take(50)->get();
-
-		return view('words.index', compact('words'));
+		return view('words.index');
 	}
 
 	/**
@@ -42,7 +40,11 @@ class WordsController extends Controller {
 	 */
 	public function show(Word $word)
 	{
-		return view('words.show', compact('word'));
+		$words[] = $word;
+
+		$list_type = 'Word: '. $word->FR;
+
+		return view('words.list', compact('words', 'list_type'));
 	}
 
 	/**
@@ -61,10 +63,10 @@ class WordsController extends Controller {
 	 */
 	public function update(Word $word)
 	{
+		$word = Word::where('id', $word->id)->first();
+
 		// If a word is emtpy in DK PL or ES and is now being set, also set corresponding date
 		$fields = ['DK', 'ES', 'PL'];
-
-		$word = Word::where('id', $word->id)->first();
 
 		foreach ($fields as $field) 
 		{
@@ -82,14 +84,18 @@ class WordsController extends Controller {
 				$word->$field = \Request::get($field);
 			}
 		}
+
+		// Set the rest of the fields
+		$word->TSDK = \Request::get('TSDK');
+		$word->TSPL = \Request::get('TSPL');
+		$word->TSES = \Request::get('TSES');
 		$word->FR = \Request::get('FR');
 		$word->EN = \Request::get('EN');
 		$word->type = \Request::get('type');
 		$word->update();
 
-		// dd($word);
 		Session::flash('success', "The word '".$word->FR."' was updated.");
-		return redirect(route('word_path', $word->id));
+		return redirect(route('word_edit_path', $word->id));
 	}
 
 	/**
@@ -129,7 +135,7 @@ class WordsController extends Controller {
 		$word->save();
 
 		Session::flash('success', "A new word '".$word->FR."' was created.");
-		return redirect('words/'.$word->id);
+		return redirect()->route('words_edit_path', $word->id);
 	}
 
 	/**
@@ -167,5 +173,17 @@ class WordsController extends Controller {
 			return $words->toArray();
 		}
 		return false;
+	}
+
+	/**
+	 * Show a random word.
+	 */
+	public function random()
+	{
+		$words = Word::orderByRaw("RAND()")->take(1)->get();
+
+		$list_type = 'Random word';
+
+		return view('words.list', compact('words', 'list_type'));
 	}
 }

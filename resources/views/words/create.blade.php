@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="panel-body">
-					{!! Form::open(['url' => route('words_path'), 'method' => 'POST', 'class' => 'form-horizontal']) !!}
+					{!! Form::open(['route' => 'word_store_path', 'class' => 'form-horizontal']) !!}
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Type</label>

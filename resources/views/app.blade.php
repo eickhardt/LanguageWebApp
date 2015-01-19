@@ -84,18 +84,26 @@
 	<script src="/js/bindWithDelay.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-	@yield('scripts')
-
 	<script type="text/javascript">
 		$(function() {
 			$('.alert-container').slideDown();
 			$('.alert-container').on('click', function() {
 				$(this).slideUp();
 			});
-			$("input").focus(function() { $(this).select(); } );
-			$('input').mouseup(function(e) { return false; });
+			$('input').on('focus', function (e) {
+			    $(this)
+			        .one('mouseup', function () {
+			            $(this).select();
+			            return false;
+			        })
+			        .select();
+			});
 		});
 	</script>
+
+	@yield('scripts')
+
+
 
 </body>
 </html>

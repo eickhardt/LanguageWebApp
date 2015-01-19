@@ -52,3 +52,7 @@ $router->resource('words', 'WordsController', [
 $router->post('words/search', 
 	['as' => 'word_search_path', 'uses' => 'WordsController@search']
 );
+
+$router->get('word/random', 
+	['as' => 'word_random_path', 'uses' => 'WordsController@random']
+);

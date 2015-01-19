@@ -7,12 +7,16 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2>
-						<a href="/words">Words</a> / Index <span id="waitmsg">/ Wait a second...</span>
+						<a href="/words">Words</a> / Index 
+						<span id="waitmsg">/ Wait a second...</span>
 					</h2>
 				</div>
 				<div id="words" class="panel-body">
 					<button onclick="document.location='{{ route('word_create_path') }}'" type="submit" class="btn btn-primary">
 						+ Create new
+					</button>
+					<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
+						? Random word
 					</button><br><br>
 
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
@@ -20,7 +24,7 @@
 						<div class="table-responsive"> 
 							<table class="table table-hover table-bordered table-striped">
 								<thead>
-									<tr class="info">
+									<tr class="active">
 										<th>Row</th>
 										<th>Type</th>
 										<th><img src="/img/flags/Denmark.png"></th>
@@ -61,7 +65,7 @@
 		var url = '/words/search';
 		var _globalObj = <?= json_encode(array('_token'=> csrf_token())) ?>;
 		var token = _globalObj._token;
-		var list = $('#list');
+		// var list = $('#list');
 
 		if ($('#searchbar').val().length > 1)
 		{
@@ -81,7 +85,7 @@
 
 		if (value.length > 1)
 		{
-			$('#words_table').show();
+			$('#words_table').hide();
 			$('#waitmsg').show();
 			$.ajax({
 				type: method,
@@ -91,24 +95,27 @@
 				{
 					for (var i = 0; i <= words.length -1; i++) 
 					{
-						var row = $('#cloneme').clone().removeAttr('id').removeAttr('style').attr('onclick', "document.location = '/words/" + words[i]['id'] + "'");
+						var row = $('#cloneme').clone().removeAttr('id').removeAttr('style');
 
 						row.addClass('removeme');
 
-						row.find('.id').html(words[i]['id']);
-						row.find('.DK').html(words[i]['DK']);
-						row.find('.DK').attr('title', words[i]['TSDK']);
-						row.find('.FR').html(words[i]['FR']);
-						row.find('.PL').html(words[i]['PL']);
+						row.find('.id').html(words[i]['id']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit'");
+						row.find('.type').html(words[i]['type']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=type'");
+
+						row.find('.DK').html(words[i]['DK']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=DK'");
+						row.find('.FR').html(words[i]['FR']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=FR'");
+						row.find('.PL').html(words[i]['PL']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=PL'");
+						row.find('.ES').html(words[i]['ES']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=ES'");
+						row.find('.EN').html(words[i]['EN']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=EN'");
+
 						row.find('.PL').attr('title', words[i]['TSPL']);
-						row.find('.ES').html(words[i]['ES']);
 						row.find('.ES').attr('title', words[i]['TSES']);
-						row.find('.EN').html(words[i]['EN']);
-						row.find('.type').html(words[i]['type']);
+						row.find('.DK').attr('title', words[i]['TSDK']);
 
 						row.appendTo($('#list'));
 					};
 					$('#waitmsg').hide();
+					$('#words_table').slideDown();
 				}
 			});
 		}
