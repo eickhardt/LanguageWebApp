@@ -22,13 +22,6 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label"><img src="/img/flags/Denmark.png"></label>
-							<div class="col-md-6">
-								{!! Form::text('DK', NULL, ['class' => 'form-control']) !!}
-							</div>
-						</div>
-
 						<div class="form-group {{ $errors->has('EN') ? 'has-error' : '' }}">
 							<label class="col-md-4 control-label"><img src="/img/flags/USA.png"></label>
 							<div class="col-md-6">
@@ -42,6 +35,13 @@
 							<div class="col-md-6">
 								{!! Form::text('FR', NULL, ['class' => 'form-control']) !!}
 								{!! $errors->first('FR', '<span class="help-block">:message</span>') !!}
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label"><img src="/img/flags/Denmark.png"></label>
+							<div class="col-md-6">
+								{!! Form::text('DK', NULL, ['class' => 'form-control']) !!}
 							</div>
 						</div>
 
