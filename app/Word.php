@@ -16,9 +16,9 @@ class Word extends Eloquent {
 	 *
 	 * @var array
 	 */
-	// protected $fillable = [
-	// 	'id', 'DK', 'FR', 'PL', 'EN', 'ES', 'TSES', 'TSDK', 'TSPL', 'type'
-	// ];
+	protected $fillable = [
+		'id', 'DK', 'FR', 'PL', 'EN', 'ES', 'TSES', 'TSDK', 'TSPL', 'type'
+	];
 
 	public $timestamps = false;
 

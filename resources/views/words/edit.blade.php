@@ -14,24 +14,27 @@
 				<div class="panel-body">
 					{!! Form::model($word, ['route' => ['word_update_path', $word->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
 							<label class="col-md-4 control-label">Type</label>
 							<div class="col-md-6">
 								{!! Form::text('type', NULL, ['class' => 'form-control type']) !!}
+								{!! $errors->first('type', '<span class="help-block">:message</span>') !!}
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('EN') ? 'has-error' : '' }}">
 							<label class="col-md-4 control-label"><img src="/img/flags/USA.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('EN', NULL, ['class' => 'form-control EN']) !!}
+								{!! $errors->first('EN', '<span class="help-block">:message</span>') !!}
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group {{ $errors->has('FR') ? 'has-error' : '' }}">
 							<label class="col-md-4 control-label"><img src="/img/flags/France.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('FR', NULL, ['class' => 'form-control FR']) !!}
+								{!! $errors->first('FR', '<span class="help-block">:message</span>') !!}
 							</div>
 						</div>
 

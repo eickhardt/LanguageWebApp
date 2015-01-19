@@ -1,25 +1,43 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\CreateWordRequest;
+use App\Http\Requests\UpdateWordRequest;
 use App\Http\Controllers\Controller;
 use App\Word;
 use Session;
+use File;
 use DB;
 use Input;
+use Response;
 
 class WordsController extends Controller {
 
+
 	/**
-	 * @var Word
+	 * @var word
 	 */
 	private $word;
 
+
+	/**
+	 * @var languages
+	 */
+	private $languages = ['DK', 'ES', 'PL'];
+
+
+	/**
+	 * Constructor
+	 *
+	 * @param Word $word
+	 */
 	public function __construct(Word $word)
 	{
 		$this->middleware('auth');
 
 		$this->word = $word;
 	}
+
 
 	/**
 	 * Show a listing of all words.
@@ -31,6 +49,7 @@ class WordsController extends Controller {
 	{
 		return view('words.index');
 	}
+
 
 	/**
 	 * Show an individual word.
@@ -47,6 +66,7 @@ class WordsController extends Controller {
 		return view('words.list', compact('words', 'list_type'));
 	}
 
+
 	/**
 	 * Show the edit page for a specific word.
 	 *
@@ -58,75 +78,82 @@ class WordsController extends Controller {
 		return view('words.edit', compact('word'));
 	}
 
+
 	/**
 	 * Update a word.
+	 *
+	 * @param CreateWordRequest $request
+	 * @param Word $word
+	 * @return mixed
 	 */
-	public function update(Word $word)
+	public function update(UpdateWordRequest $request, Word $word)
 	{
-		$word = Word::where('id', $word->id)->first();
+		$word->TSDK = $request->get('TSDK');
+		$word->TSPL = $request->get('TSPL');
+		$word->TSES = $request->get('TSES');
 
 		// If a word is emtpy in DK PL or ES and is now being set, also set corresponding date
-		$fields = ['DK', 'ES', 'PL'];
-
-		foreach ($fields as $field) 
+		foreach ($this->languages as $field) 
 		{
 			if ($word->$field == NULL)
 			{
-				if (\Request::get($field))
+				if ($request->get($field))
 				{
-					$word->$field = \Request::get($field);
+					$word->$field = $request->get($field);
 					$timefield = 'TS'.$field;
 					$word->$timefield = date('Y-m-d');
 				}
 			}
 			else
 			{
-				$word->$field = \Request::get($field);
+				$word->$field = $request->get($field);
 			}
 		}
 
 		// Set the rest of the fields
-		$word->TSDK = \Request::get('TSDK');
-		$word->TSPL = \Request::get('TSPL');
-		$word->TSES = \Request::get('TSES');
-		$word->FR = \Request::get('FR');
-		$word->EN = \Request::get('EN');
-		$word->type = \Request::get('type');
+		$word->FR = $request->get('FR');
+		$word->EN = $request->get('EN');
+		$word->type = $request->get('type');
 		$word->update();
 
 		Session::flash('success', "The word '".$word->FR."' was updated.");
-		return redirect(route('word_edit_path', $word->id));
+		return redirect()->route('word_edit_path', $word->id);
 	}
+
 
 	/**
 	 * Show form for creating a new word.
+	 *
+	 * @return mixed
 	 */
 	public function create()
 	{
 		return view('words.create');
 	}
 
+
 	/**
 	 * Store a new word.
+	 *
+	 * @param CreateWordRequest $request
+	 * @return mixed
 	 */
-	public function store()
+	public function store(CreateWordRequest $request)
 	{
-		// TODO: Validate.
-
-		// Create word
+		// If this code is executed, validation has passed and we can create the word.
 		$word = new Word;
-		$word->type = \Request::get('type');
-		$word->FR = \Request::get('FR');
-		$word->EN = \Request::get('EN');
-		
-		$word->DK = \Request::get('DK');
-		$word->ES = \Request::get('ES');
-		$word->PL = \Request::get('PL');
 
-		$fields = ['DK', 'ES', 'PL'];
-		foreach ($fields as $field) 
+		$word->type = $request->get('type');
+
+		$word->FR = $request->get('FR');
+		$word->EN = $request->get('EN');
+		$word->DK = $request->get('DK');
+		$word->ES = $request->get('ES');
+		$word->PL = $request->get('PL');
+
+		foreach ($this->languages as $field) 
 		{
-			if (\Request::get($field))
+			if ($request->get($field))
 			{
 				$timefield = 'TS'.$field;
 				$word->$timefield = date('Y-m-d');
@@ -138,8 +165,12 @@ class WordsController extends Controller {
 		return redirect()->route('word_edit_path', $word->id);
 	}
 
+
 	/**
 	 * Delete a word
+	 *
+	 * @param Word $word
+	 * @return mixed
 	 */
 	public function destroy(Word $word)
 	{
@@ -147,11 +178,14 @@ class WordsController extends Controller {
 		$word->delete();
 
 		Session::flash('success', "The word '" .$oldword. "' was deleted.");
-		return redirect('words');
+		return redirect()->route('words_path');
 	}
+
 
 	/**
 	 * Search for a word.
+	 *
+	 * @return mixed
 	 */
 	public function search()
 	{
@@ -175,8 +209,11 @@ class WordsController extends Controller {
 		return false;
 	}
 
+
 	/**
 	 * Show a random word.
+	 *
+	 * @return mixed
 	 */
 	public function random()
 	{
@@ -185,5 +222,31 @@ class WordsController extends Controller {
 		$list_type = 'Random word';
 
 		return view('words.list', compact('words', 'list_type'));
+	}
+
+
+	/**
+	 * Backup the words_all table.
+	 *
+	 * @return mixed
+	 */
+	public function backup()
+	{
+		// Get the words_all table in json form
+		$json_data = Word::all()->toJson();
+
+		// Create the name of the file we are going to store
+		$storage_file = storage_path().'/data/backups/wordsBackup'.time().'.json';
+
+		// Write the json data to the new file
+		$bytes_written = File::put($storage_file, $json_data);
+		if ($bytes_written === false)
+		{
+		    die("Error writing to storage file");
+		}
+
+		// Serve the download
+        $headers = ['Content-Type: application/json'];
+        return Response::download($storage_file, 'LanguageLearningBackup'.time().'.json', $headers);
 	}
 }

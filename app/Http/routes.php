@@ -56,3 +56,7 @@ $router->post('words/search',
 $router->get('word/random', 
 	['as' => 'word_random_path', 'uses' => 'WordsController@random']
 );
+
+$router->get('word/backup', 
+	['as' => 'word_backup_path', 'uses' => 'WordsController@backup']
+);

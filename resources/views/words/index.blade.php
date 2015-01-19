@@ -17,6 +17,9 @@
 					</button>
 					<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-question-sign"></span> Random word
+					</button>
+					<button onclick="document.location='{{ route('word_backup_path') }}'" type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-download"></span> Backup
 					</button><br><br>
 
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
