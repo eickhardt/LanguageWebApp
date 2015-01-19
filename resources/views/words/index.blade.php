@@ -44,6 +44,7 @@
 										<td title="" class="clickable PL"></td>
 										<td title="" class="clickable ES"></td>
 									</tr>
+									<tr id="noresult"><td colspan="7">There seems to be nothing here.</td></tr>
 								</tbody>
 							</table>
 						</div>
@@ -65,7 +66,6 @@
 		var url = '/words/search';
 		var _globalObj = <?= json_encode(array('_token'=> csrf_token())) ?>;
 		var token = _globalObj._token;
-		// var list = $('#list');
 
 		if ($('#searchbar').val().length > 1)
 		{
@@ -93,27 +93,35 @@
 				data: { value: value, _token: token },
 				success: function(words) 
 				{
-					for (var i = 0; i <= words.length -1; i++) 
+					if (words.length > 0)
 					{
-						var row = $('#cloneme').clone().removeAttr('id').removeAttr('style');
+						for (var i = 0; i <= words.length -1; i++) 
+						{
+							var row = $('#cloneme').clone().removeAttr('id').removeAttr('style');
 
-						row.addClass('removeme');
+							row.addClass('removeme');
 
-						row.find('.id').html(words[i]['id']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit'");
-						row.find('.type').html(words[i]['type']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=type'");
+							row.find('.id').html(words[i]['id']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit'");
+							row.find('.type').html(words[i]['type']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=type'");
 
-						row.find('.DK').html(words[i]['DK']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=DK'");
-						row.find('.FR').html(words[i]['FR']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=FR'");
-						row.find('.PL').html(words[i]['PL']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=PL'");
-						row.find('.ES').html(words[i]['ES']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=ES'");
-						row.find('.EN').html(words[i]['EN']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=EN'");
+							row.find('.DK').html(words[i]['DK']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=DK'");
+							row.find('.FR').html(words[i]['FR']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=FR'");
+							row.find('.PL').html(words[i]['PL']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=PL'");
+							row.find('.ES').html(words[i]['ES']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=ES'");
+							row.find('.EN').html(words[i]['EN']).attr('onclick', "document.location = '/words/" + words[i]['id'] + "/edit?focus=EN'");
 
-						row.find('.PL').attr('title', words[i]['TSPL']);
-						row.find('.ES').attr('title', words[i]['TSES']);
-						row.find('.DK').attr('title', words[i]['TSDK']);
+							row.find('.PL').attr('title', words[i]['TSPL']);
+							row.find('.ES').attr('title', words[i]['TSES']);
+							row.find('.DK').attr('title', words[i]['TSDK']);
 
-						row.appendTo($('#list'));
-					};
+							row.appendTo($('#list'));
+						};
+						$('#noresult').hide();
+					} 
+					else 
+					{
+						$('#noresult').show();
+					}
 					$('#waitmsg').hide();
 					$('#words_table').slideDown();
 				}
