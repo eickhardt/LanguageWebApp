@@ -9,14 +9,12 @@ class WordTableSeeder extends Seeder {
   {
     DB::table('words_all')->delete();
 
-    // LanguageLearningBackup_Test
-    // $backup_path = storage_path().'/data/backups/';
-    $backup_path = storage_path().'/data/';
+    $backup_path = storage_path().'/data/backups/';
 
     $files = scandir($backup_path, SCANDIR_SORT_DESCENDING);
     $newest_file = $files[0];
 
-    $wordJson = File::get($backup_path.'LanguageLearningBackup_Test.json');
+    $wordJson = File::get($backup_path.$newest_file);
 
     $word = json_decode($wordJson);
     foreach ($word as $object) {
