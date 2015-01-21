@@ -17,7 +17,9 @@
  */
 get('/', 'WelcomeController@index');
 
-get('home', 'HomeController@index');
+$router->get('home', 
+	['as' => 'home', 'uses' => 'HomeController@index']
+);
 
 // TODO: Fix proper registration
 get('auth/register', function() {

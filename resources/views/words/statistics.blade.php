@@ -32,7 +32,7 @@
 								</thead>
 								@foreach ($recent_words_data as $key => $fields)
 									<tr>
-										<td class="active">{{ $key }}</td>
+										<td class="active"><b>{{ $key }}</b></td>
 										@foreach ($fields as $field)
 										<td>
 											{{ $field }}
@@ -65,7 +65,7 @@
 									<tr>
 										@foreach ($fields as $field)
 											@if ($count == 0)
-												<td class="active">{{ $field }}</td>
+												<td class="active"><b>{{ $field }}</b></td>
 											@else
 												<td>{{ $field }}</td>
 											@endif
