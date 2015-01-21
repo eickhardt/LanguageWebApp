@@ -5,6 +5,7 @@ use App\Http\Requests\CreateWordRequest;
 use App\Http\Requests\UpdateWordRequest;
 use App\Http\Controllers\Controller;
 use App\Word;
+use App\WordOfDay;
 use Session;
 use File;
 use DB;
@@ -237,7 +238,6 @@ class WordsController extends Controller {
 
 		// Create the name of the file we are going to store
 		$storage_file = storage_path().'/data/backups/wordsBackup'.time().'.json';
-		// $storage_file = storage_path().'/data/LanguageLearningBackup_Test.json';
 
 		// Write the json data to the new file
 		$bytes_written = File::put($storage_file, $json_data);
@@ -249,6 +249,18 @@ class WordsController extends Controller {
 		// Serve the download
         $headers = ['Content-Type: application/json'];
         return Response::download($storage_file, 'LanguageLearningBackup'.time().'.json', $headers);
+	}
+
+
+	/**
+	 * Display Word of the Day.
+	 */
+	public function wotd()
+	{
+		$words = [];
+		$words[] = WordOfDay::where('date', date('Y-m-d'))->first()->word;
+
+		return view('words.list', compact('words'));
 	}
 
 
@@ -388,9 +400,6 @@ class WordsController extends Controller {
 				$recent_words_data[$language][$date] = $wordcount;
 			}
 		}
-
-
-		// dd($recent_words_data);
 
 		return view('words.statistics', compact('statistics_data', 'recent_words_data'));
 	}

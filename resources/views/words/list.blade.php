@@ -1,13 +1,16 @@
 @extends('app')
 
 @section('content')
+
+<?php if (!isset($list_type)) { $list_type = ''; } ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2>
-						{!! link_to_route('words_path', 'Words') !!} / List {{ isset($list_type) ? '/ '.$list_type : '' }}
+						{!! link_to_route('words_path', 'Words') !!} / List {{ $list_type != '' ? '/ '.$list_type : '' }}
 					</h2>
 				</div>
 
@@ -18,7 +21,7 @@
 							<span class="glyphicon glyphicon-question-sign"></span> Random word
 						</button><br><br>
 					@endif
-					
+
 					<div class="panel panel-default">
 						<div class="table-responsive"> 
 							<table class="table table-hover table-bordered table-striped">

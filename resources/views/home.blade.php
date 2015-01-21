@@ -9,16 +9,12 @@
 
 				<div class="panel-body">
 					@unless (Auth::guest())
-						You are logged in! Just checkin to see if deployment works. - Daniel<br><br>
-
+						You are logged in! Word of the day is: <b>{!! link_to_route('word_wotd_path', $wotd->FR) !!}</b><br><br>
 						<div class="list-group">
 							<a href="#" class="list-group-item active">
 								You have access to the following features:
 							</a>
-							<a href="/words" class="list-group-item">Words<span class="badge">{{ $wordcount }}</span></a>
-							<!-- <a href="#" class="list-group-item">Morbi leo risus</a>
-							<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-							<a href="#" class="list-group-item">Vestibulum at eros</a> -->
+							<a href="/words" class="list-group-item">Words <span class="badge">{{ $wordcount }}</span></a>
 						</div>
 					@else
 						You are not logged in. Log in <a href="/auth/login">here</a>.

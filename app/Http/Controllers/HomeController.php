@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Word;
+use App\WordOfDay;
 
 class HomeController extends Controller {
 
@@ -33,7 +34,8 @@ class HomeController extends Controller {
 	public function index(Word $word)
 	{
 		$wordcount = $word->count();
-		return view('home', compact('wordcount'));
+		$wotd = WordOfDay::where('date', date('Y-m-d'))->first()->word;
+		return view('home', compact('wordcount', 'wotd'));
 	}
 
 }

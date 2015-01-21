@@ -33,24 +33,13 @@
 								@foreach ($recent_words_data as $key => $fields)
 									<tr>
 										<td class="active">{{ $key }}</td>
-
 										@foreach ($fields as $field)
 										<td>
 											{{ $field }}
 										</td>
 										@endforeach
 									</tr>
-
 								@endforeach
-								<?php /*
-								<tr>
-									<td class="active">Danish</td>
-									<?php /* @foreach ($words_added as $fields)
-										<td>{{ $field }}</td>
-									@endforeach 
-								</tr>
-								<tr><td class="active">Polish</td> </tr>
-								<tr><td class="active">Spanish</td> </tr> */ ?>
 							</table>
 						</div>
 					</div>

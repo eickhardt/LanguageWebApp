@@ -11,6 +11,7 @@
 |
 */
 
+
 /**
  * Static guest routes
  */
@@ -28,10 +29,10 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+
 /**
  * Routes that require login
  */
-
 $router->bind('words', function($id) 
 {
 	return App\Word::where('id', $id)->first();
@@ -63,4 +64,8 @@ $router->get('word/backup',
 
 $router->get('word/statistics', 
 	['as' => 'word_statistics_path', 'uses' => 'WordsController@statistics']
+);
+
+$router->get('word/word_of_the_day', 
+	['as' => 'word_wotd_path', 'uses' => 'WordsController@wotd']
 );

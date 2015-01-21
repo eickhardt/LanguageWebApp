@@ -10,10 +10,13 @@
 						<a href="/words">Words</a> / Index 
 						<span id="waitmsg">/ Wait a second...</span>
 					</h2>
-				</div>
+				</div> 
 				<div id="words" class="panel-body">
 					<button onclick="document.location='{{ route('word_create_path') }}'" type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-plus-sign"></span> Create new
+					</button>
+					<button onclick="document.location='{{ route('word_wotd_path') }}'" type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-certificate"></span> Word of the Day
 					</button>
 					<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
 						<span class="glyphicon glyphicon-question-sign"></span> Random word

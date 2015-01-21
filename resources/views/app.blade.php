@@ -40,7 +40,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/home">Home</a></li>
 					@unless (Auth::guest()) 
-						<li><a href="/words">Words</a></li>
+						<li>{!! link_to_route('words_path', 'Words') !!}</li>
 					@endunless
 				</ul>
 
@@ -102,8 +102,6 @@
 	</script>
 
 	@yield('scripts')
-
-
 
 </body>
 </html>
