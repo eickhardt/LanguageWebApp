@@ -260,7 +260,9 @@ class WordsController extends Controller {
 		$words = [];
 		$words[] = WordOfDay::where('date', date('Y-m-d'))->first()->word;
 
-		return view('words.list', compact('words'));
+		$list_type = 'Word of the Day';
+
+		return view('words.list', compact('words', 'list_type'));
 	}
 
 
