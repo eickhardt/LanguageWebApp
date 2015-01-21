@@ -34,11 +34,11 @@
 									<tr class="active">
 										<th>Row</th>
 										<th>Type</th>
-										<th><img src="/img/flags/Denmark.png"></th>
-										<th><img src="/img/flags/USA.png"></th>
-										<th><img src="/img/flags/France.png"></th>
-										<th><img src="/img/flags/Poland.png"></th>
-										<th><img src="/img/flags/Spain.png"></th>
+										<th><img src="/img/flags/DK.png"></th>
+										<th><img src="/img/flags/EN.png"></th>
+										<th><img src="/img/flags/FR.png"></th>
+										<th><img src="/img/flags/PL.png"></th>
+										<th><img src="/img/flags/ES.png"></th>
 									</tr>
 								</thead>
 								<tbody id="list">

@@ -23,7 +23,7 @@
 						</div>
 
 						<div class="form-group {{ $errors->has('EN') ? 'has-error' : '' }}">
-							<label class="col-md-4 control-label"><img src="/img/flags/USA.png"></label>
+							<label class="col-md-4 control-label"><img src="/img/flags/EN.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('EN', NULL, ['class' => 'form-control EN']) !!}
 								{!! $errors->first('EN', '<span class="help-block">:message</span>') !!}
@@ -31,7 +31,7 @@
 						</div>
 
 						<div class="form-group {{ $errors->has('FR') ? 'has-error' : '' }}">
-							<label class="col-md-4 control-label"><img src="/img/flags/France.png"></label>
+							<label class="col-md-4 control-label"><img src="/img/flags/FR.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('FR', NULL, ['class' => 'form-control FR']) !!}
 								{!! $errors->first('FR', '<span class="help-block">:message</span>') !!}
@@ -39,21 +39,21 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label"><img src="/img/flags/Denmark.png"></label>
+							<label class="col-md-4 control-label"><img src="/img/flags/DK.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('DK', NULL, ['class' => 'form-control DK']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label"><img src="/img/flags/Poland.png"></label>
+							<label class="col-md-4 control-label"><img src="/img/flags/PL.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('PL', NULL, ['class' => 'form-control PL']) !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label"><img src="/img/flags/Spain.png"></label>
+							<label class="col-md-4 control-label"><img src="/img/flags/ES.png"></label>
 							<div class="col-md-6">
 								{!! Form::text('ES', NULL, ['class' => 'form-control ES']) !!}
 							</div>
