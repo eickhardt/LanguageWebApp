@@ -60,3 +60,7 @@ $router->get('word/random',
 $router->get('word/backup', 
 	['as' => 'word_backup_path', 'uses' => 'WordsController@backup']
 );
+
+$router->get('word/statistics', 
+	['as' => 'word_statistics_path', 'uses' => 'WordsController@statistics']
+);

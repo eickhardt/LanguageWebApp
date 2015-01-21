@@ -14,7 +14,7 @@
 				<div class="panel-body">
 					<div class="panel panel-default">
 						<div class="table-responsive"> 
-							<table class="table table-hover table-bordered">
+							<table class="table table-hover table-bordered table-striped">
 								<thead>
 									<tr class="active">
 										<th>Row</th>
