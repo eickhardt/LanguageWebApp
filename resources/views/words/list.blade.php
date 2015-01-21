@@ -12,6 +12,13 @@
 				</div>
 
 				<div class="panel-body">
+
+					@if ($list_type == 'Random word')
+						<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
+							<span class="glyphicon glyphicon-question-sign"></span> Random word
+						</button><br><br>
+					@endif
+					
 					<div class="panel panel-default">
 						<div class="table-responsive"> 
 							<table class="table table-hover table-bordered table-striped">
