@@ -175,6 +175,12 @@ class WordsController extends Controller {
 	 */
 	public function destroy(Word $word)
 	{
+		if (Auth::user()->id > 2)
+		{
+			Session::flash('error', "You don't have permission to do that.");
+			return $this->redirector->back();
+		}
+
 		$oldword = $word->FR;
 		$word->delete();
 
