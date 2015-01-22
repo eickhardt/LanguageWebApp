@@ -8,6 +8,7 @@ use App\Word;
 use App\WordOfDay;
 use Session;
 use File;
+use Auth;
 use DB;
 use Input;
 use Response;
@@ -178,7 +179,7 @@ class WordsController extends Controller {
 		if (Auth::user()->id > 2)
 		{
 			Session::flash('error', "You don't have permission to do that.");
-			return $this->redirector->back();
+			return redirect()->back();
 		}
 
 		$oldword = $word->FR;
