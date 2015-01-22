@@ -34,7 +34,10 @@ class HomeController extends Controller {
 	public function index(Word $word)
 	{
 		$wordcount = $word->count();
-		$wotd = WordOfDay::where('date', date('Y-m-d'))->first()->word;
+
+		$word = new WordOfDay();
+		$wotd = $word->getCurrent();
+		
 		return view('home', compact('wordcount', 'wotd'));
 	}
 

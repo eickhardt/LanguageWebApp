@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Word extends Eloquent {
 
+	public $timestamps = false;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -19,7 +21,5 @@ class Word extends Eloquent {
 	protected $fillable = [
 		'DK', 'FR', 'PL', 'EN', 'ES', 'TSES', 'TSDK', 'TSPL', 'type'
 	];
-
-	public $timestamps = false;
 
 }

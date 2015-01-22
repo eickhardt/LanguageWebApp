@@ -186,6 +186,7 @@ class WordsController extends Controller {
 	/**
 	 * Search for a word.
 	 *
+	 * @param String $value  The value to search for.
 	 * @return mixed
 	 */
 	public function search()
@@ -254,11 +255,15 @@ class WordsController extends Controller {
 
 	/**
 	 * Display Word of the Day.
+	 *
+	 * @return mixed
 	 */
 	public function wotd()
 	{
 		$words = [];
-		$words[] = WordOfDay::where('date', date('Y-m-d'))->first()->word;
+
+		$word = new WordOfDay();
+		$words[] = $word->getcurrent();
 
 		$list_type = 'Word of the Day';
 

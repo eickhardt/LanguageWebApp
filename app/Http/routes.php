@@ -71,3 +71,7 @@ $router->get('word/statistics',
 $router->get('word/word_of_the_day', 
 	['as' => 'word_wotd_path', 'uses' => 'WordsController@wotd']
 );
+
+$router->get('user/settings', 
+	['as' => 'user_settings_path', 'uses' => 'UsersController@settings']
+);
