@@ -1,6 +1,8 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Session;
+use Auth;
 
 class UpdateWordRequest extends Request {
 
@@ -11,7 +13,21 @@ class UpdateWordRequest extends Request {
 	 */
 	public function authorize()
 	{
+		$user = Auth::user();
+		if ($user->id > 2)
+		{
+			return false;
+		}
 		return true;
+	}
+
+	/**
+	 * Respond accordingly if the user is not authorized.
+	 */
+	public function forbiddenResponse()
+	{
+		Session::flash('error', "You don't have permission to do that.");
+		return $this->redirector->back();
 	}
 
 	/**

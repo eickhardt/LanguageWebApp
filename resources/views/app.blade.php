@@ -52,7 +52,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="/auth/logout">Settings</a></li>
+								<li><a href="#">Settings</a></li>
 								<li class="divider"></li>
 								<li><a href="/auth/logout">Logout</a></li>
 							</ul>
@@ -68,11 +68,19 @@
 		<div class="container alert-container" style="display: none;">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
-						
 					<div class="alert alert-success">
 						<strong>Voila!</strong> - {{ Session::get('success') }} <br>
 					</div>
-						
+				</div>
+			</div>
+		</div>
+	@elseif (Session::has('error'))
+		<div class="container alert-container" style="display: none;">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div class="alert alert-danger">
+						<strong>Oups!</strong> - {{ Session::get('error') }} <br>
+					</div>
 				</div>
 			</div>
 		</div>

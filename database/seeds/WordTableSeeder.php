@@ -30,6 +30,10 @@ class WordTableSeeder extends Seeder {
         'TSPL' => $object->TSPL,
       ));
     }
+
+    DB::table('word_of_day')->delete();
+
+    Artisan::call('setwordofday');
   }
 
 }
