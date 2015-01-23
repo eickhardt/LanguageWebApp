@@ -289,11 +289,11 @@ class WordsController extends Controller {
 
 		// Totals
 		$statistics_data['total']['name'] = 'All';
-		$statistics_data['total']['total_all'] = Word::all()->count();
-		$statistics_data['total']['total_nouns'] = Word::where('type', '>', 99)->where('type', '<', 200)->count();
-		$statistics_data['total']['total_adjectives'] = Word::where('type', '>', 199)->where('type', '<', 300)->count();
-		$statistics_data['total']['total_verbs'] = Word::where('type', '>', 299)->where('type', '<', 400)->count();
-		$statistics_data['total']['total_other'] = Word::where('type', '>', 399)->where('type', '<', 999)->count();
+		$statistics_data['total']['total_all'] = '';
+		$statistics_data['total']['total_nouns'] = '';
+		$statistics_data['total']['total_adjectives'] = '';
+		$statistics_data['total']['total_verbs'] = '';
+		$statistics_data['total']['total_other'] = '';
 		$statistics_data['total']['total_percent'] = '';
 
 		// English
@@ -303,7 +303,6 @@ class WordsController extends Controller {
 		$statistics_data['EN']['total_adjectives'] = Word::where('EN', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
 		$statistics_data['EN']['total_verbs'] = Word::where('EN', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
 		$statistics_data['EN']['total_other'] = Word::where('EN', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		$statistics_data['EN']['total_percent'] = round( $statistics_data['EN']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// French
 		$statistics_data['FR']['name'] = 'French';
@@ -312,7 +311,6 @@ class WordsController extends Controller {
 		$statistics_data['FR']['total_adjectives'] = Word::where('FR', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
 		$statistics_data['FR']['total_verbs'] = Word::where('FR', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
 		$statistics_data['FR']['total_other'] = Word::where('FR', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		$statistics_data['FR']['total_percent'] = round( $statistics_data['FR']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Danish
 		$statistics_data['DK']['name'] = 'Danish';
@@ -321,7 +319,6 @@ class WordsController extends Controller {
 		$statistics_data['DK']['total_adjectives'] = Word::where('DK', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
 		$statistics_data['DK']['total_verbs'] = Word::where('DK', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
 		$statistics_data['DK']['total_other'] = Word::where('DK', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		$statistics_data['DK']['total_percent'] = round( $statistics_data['DK']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Polish
 		$statistics_data['PL']['name'] = 'Polish';
@@ -330,7 +327,6 @@ class WordsController extends Controller {
 		$statistics_data['PL']['total_adjectives'] = Word::where('PL', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
 		$statistics_data['PL']['total_verbs'] = Word::where('PL', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
 		$statistics_data['PL']['total_other'] = Word::where('PL', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		$statistics_data['PL']['total_percent'] = round( $statistics_data['PL']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Spanish
 		$statistics_data['ES']['name'] = 'Spanish';
@@ -339,6 +335,18 @@ class WordsController extends Controller {
 		$statistics_data['ES']['total_adjectives'] = Word::where('ES', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
 		$statistics_data['ES']['total_verbs'] = Word::where('ES', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
 		$statistics_data['ES']['total_other'] = Word::where('ES', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
+
+		// The total sum of words
+		$statistics_data['total']['total_all'] = $statistics_data['EN']['total_all'] + $statistics_data['FR']['total_all'] + $statistics_data['DK']['total_all'] + $statistics_data['PL']['total_all'] + $statistics_data['ES']['total_all'];
+		$statistics_data['total']['total_nouns'] = $statistics_data['EN']['total_nouns'] + $statistics_data['FR']['total_nouns'] + $statistics_data['DK']['total_nouns'] + $statistics_data['PL']['total_nouns'] + $statistics_data['ES']['total_nouns'];
+		$statistics_data['total']['total_adjectives'] = $statistics_data['EN']['total_adjectives'] + $statistics_data['FR']['total_adjectives'] + $statistics_data['DK']['total_adjectives'] + $statistics_data['PL']['total_adjectives'] + $statistics_data['ES']['total_adjectives'];
+		$statistics_data['total']['total_verbs'] = $statistics_data['EN']['total_verbs'] + $statistics_data['FR']['total_verbs'] + $statistics_data['DK']['total_verbs'] + $statistics_data['PL']['total_verbs'] + $statistics_data['ES']['total_verbs'];
+		$statistics_data['total']['total_other'] = $statistics_data['EN']['total_other'] + $statistics_data['FR']['total_other'] + $statistics_data['DK']['total_other'] + $statistics_data['PL']['total_other'] + $statistics_data['ES']['total_other'];
+
+		$statistics_data['EN']['total_percent'] = round( $statistics_data['EN']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
+		$statistics_data['FR']['total_percent'] = round( $statistics_data['FR']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
+		$statistics_data['DK']['total_percent'] = round( $statistics_data['DK']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
+		$statistics_data['PL']['total_percent'] = round( $statistics_data['PL']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 		$statistics_data['ES']['total_percent'] = round( $statistics_data['ES']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 
@@ -375,14 +383,6 @@ class WordsController extends Controller {
 		// Only a specific language
 
 		// Only Danish
-		// $statistics_data['ONLY_DK']['name'] = 'Only DK';
-		// $statistics_data['ONLY_DK']['total_all'] = Word::where('DK', '!=', '')->where('ES', '=', '')->where('PL', '=', '')->count();
-		// $statistics_data['ONLY_DK']['total_nouns'] = Word::where('DK', '!=', '')->where('ES', '=', '')->where('PL', '=', '')->where('type', '>', 99)->where('type', '<', 200)->count();
-		// $statistics_data['ONLY_DK']['total_adjectives'] = Word::where('DK', '!=', '')->where('ES', '=', '')->where('PL', '=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
-		// $statistics_data['ONLY_DK']['total_verbs'] = Word::where('DK', '!=', '')->where('ES', '=', '')->where('PL', '=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
-		// $statistics_data['ONLY_DK']['total_other'] = Word::where('DK', '!=', '')->where('ES', '=', '')->where('PL', '=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		// $statistics_data['ONLY_DK']['total_percent'] = round( $statistics_data['ONLY_DK']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
-
 		$statistics_data['ONLY_DK']['name'] = 'Only DK';
 		$statistics_data['ONLY_DK']['total_all'] = Word::whereNull('ES')->whereNull('PL')->count();
 		$statistics_data['ONLY_DK']['total_nouns'] = Word::whereNull('ES')->whereNull('PL')->where('type', '>', 99)->where('type', '<', 200)->count();
@@ -392,14 +392,6 @@ class WordsController extends Controller {
 		$statistics_data['ONLY_DK']['total_percent'] = round( $statistics_data['ONLY_DK']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Only Polish
-		// $statistics_data['ONLY_PL']['name'] = 'Only PL';
-		// $statistics_data['ONLY_PL']['total_all'] = Word::where('PL', '!=', '')->where('ES', '=', '')->where('DK', '=', '')->count();
-		// $statistics_data['ONLY_PL']['total_nouns'] = Word::where('PL', '!=', '')->where('ES', '=', '')->where('DK', '=', '')->where('type', '>', 99)->where('type', '<', 200)->count();
-		// $statistics_data['ONLY_PL']['total_adjectives'] = Word::where('PL', '!=', '')->where('ES', '=', '')->where('DK', '=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
-		// $statistics_data['ONLY_PL']['total_verbs'] = Word::where('PL', '!=', '')->where('ES', '=', '')->where('DK', '=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
-		// $statistics_data['ONLY_PL']['total_other'] = Word::where('PL', '!=', '')->where('ES', '=', '')->where('DK', '=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		// $statistics_data['ONLY_PL']['total_percent'] = round( $statistics_data['ONLY_PL']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
-
 		$statistics_data['ONLY_ES']['name'] = 'Only ES';
 		$statistics_data['ONLY_ES']['total_all'] = Word::whereNull('DK')->whereNull('PL')->count();
 		$statistics_data['ONLY_ES']['total_nouns'] = Word::whereNull('DK')->whereNull('PL')->where('type', '>', 99)->where('type', '<', 200)->count();
@@ -409,14 +401,6 @@ class WordsController extends Controller {
 		$statistics_data['ONLY_ES']['total_percent'] = round( $statistics_data['ONLY_ES']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Only Spanish
-		// $statistics_data['ONLY_ES']['name'] = 'Only ES';
-		// $statistics_data['ONLY_ES']['total_all'] = Word::where('ES', '!=', '')->where('DK', '=', '')->where('PL', '=', '')->count();
-		// $statistics_data['ONLY_ES']['total_nouns'] = Word::where('ES', '!=', '')->where('DK', '=', '')->where('PL', '=', '')->where('type', '>', 99)->where('type', '<', 200)->count();
-		// $statistics_data['ONLY_ES']['total_adjectives'] = Word::where('ES', '!=', '')->where('DK', '=', '')->where('PL', '=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
-		// $statistics_data['ONLY_ES']['total_verbs'] = Word::where('ES', '!=', '')->where('DK', '=', '')->where('PL', '=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
-		// $statistics_data['ONLY_ES']['total_other'] = Word::where('ES', '!=', '')->where('DK', '=', '')->where('PL', '=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
-		// $statistics_data['ONLY_ES']['total_percent'] = round( $statistics_data['ONLY_ES']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
-
 		$statistics_data['ONLY_PL']['name'] = 'Only PL';
 		$statistics_data['ONLY_PL']['total_all'] = Word::whereNull('DK')->whereNull('ES')->count();
 		$statistics_data['ONLY_PL']['total_nouns'] = Word::whereNull('DK')->whereNull('ES')->where('type', '>', 99)->where('type', '<', 200)->count();
