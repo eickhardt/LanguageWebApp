@@ -26,7 +26,7 @@ class WordOfDay extends Eloquent {
 	 */
 	public function getCurrent()
 	{
-		return $this->where('date', date('Y-m-d'))->first()->word;
+		return $this->orderBy('date', 'DESC')->first()->word;
 	}
 
 }
