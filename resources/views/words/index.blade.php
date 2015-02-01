@@ -29,6 +29,27 @@
 					</button>
 					<br><br>
 
+					<?php /*
+					<button id="advanced_search_btn" type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-dashboard"></span> Advanced search
+					</button>
+
+					<div id="search_settings" class="panel panel-default">
+						<div class="panel-heading">
+							Advanced search settings
+						</div>
+						<div class="panel-body">
+							<h4>Languages</h4>
+							<div class="well well-sm">
+								<span class="search_language"><img src="/img/flags/DK.png"> {!! Form::checkbox('DK', 'DK', true) !!}</span>
+								<span class="search_language"><img src="/img/flags/EN.png"> {!! Form::checkbox('EN', 'EN', true) !!}</span>
+								<span class="search_language"><img src="/img/flags/FR.png"> {!! Form::checkbox('FR', 'FR', true) !!}</span>
+								<span class="search_language"><img src="/img/flags/PL.png"> {!! Form::checkbox('PL', 'PL', true) !!}</span>
+								<span class="search_language"><img src="/img/flags/ES.png"> {!! Form::checkbox('ES', 'ES', true) !!}</span>
+							</div>
+						</div>
+					</div>*/ ?>
+
 					<input id="searchbar" class="form-control" placeholder="Search for..." /><br>
 					<div id="words_table" class="panel panel-default">
 						<div class="table-responsive"> 
@@ -72,6 +93,12 @@
 <script type="text/javascript">
 	$(function() 
 	{
+		// Show advanced options when the corresponsing button is clicked
+		// $('#advanced_search_btn').on('click', function() 
+		// {
+		// 	$('#search_settings').slideToggle();
+		// });
+
 		var method = 'POST';
 		var url = '/words/search';
 		var _globalObj = <?= json_encode(array('_token'=> csrf_token())) ?>;

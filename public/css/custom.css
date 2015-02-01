@@ -21,3 +21,11 @@
 #noresult {
 	display: none;
 }
+
+#search_settings {
+	display: none;
+}
+
+.search_language {
+	margin-right: 20px;
+}
