@@ -5,7 +5,7 @@ This application is intended for language and code training purposes.
 As the application expands, please update the information here if it does not reflect the current state of the project.
 
 * Login
-* Registrations (currently disabled)
+* User registration (currently disabled)
 * Word database REST
 	* Search functionality
 	* Word of the day
@@ -13,6 +13,7 @@ As the application expands, please update the information here if it does not re
 	* Backup on the server and downloadable file
 
 ## To come:
+* Word API
 * Advanced search
 * Advanced statistics
 * Database restructuring
