@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Input;
 use Response;
+use Debugbar;
 
 class WordsController extends Controller {
 
@@ -90,9 +91,9 @@ class WordsController extends Controller {
 	 */
 	public function update(UpdateWordRequest $request, Word $word)
 	{
-		$word->TSDK = $request->get('TSDK');
-		$word->TSPL = $request->get('TSPL');
-		$word->TSES = $request->get('TSES');
+		$word->TSDK = $request->get('TSDK') ?: NULL;
+		$word->TSPL = $request->get('TSPL') ?: NULL;
+		$word->TSES = $request->get('TSES') ?: NULL;
 
 		// If a word is emtpy in DK PL or ES and is now being set, also set corresponding date
 		foreach ($this->languages as $field) 
@@ -108,7 +109,7 @@ class WordsController extends Controller {
 			}
 			else
 			{
-				$word->$field = $request->get($field);
+				$word->$field = $request->get($field) ?: NULL;
 			}
 		}
 
@@ -149,9 +150,9 @@ class WordsController extends Controller {
 
 		$word->FR = $request->get('FR');
 		$word->EN = $request->get('EN');
-		$word->DK = $request->get('DK');
-		$word->ES = $request->get('ES');
-		$word->PL = $request->get('PL');
+		$word->DK = $request->get('DK') ?: NULL ;
+		$word->ES = $request->get('ES') ?: NULL ;
+		$word->PL = $request->get('PL') ?: NULL ;
 
 		foreach ($this->languages as $field) 
 		{
@@ -391,7 +392,7 @@ class WordsController extends Controller {
 		$statistics_data['ONLY_DK']['total_other'] = Word::whereNull('ES')->whereNull('PL')->where('type', '>', 399)->where('type', '<', 999)->count();
 		$statistics_data['ONLY_DK']['total_percent'] = round( $statistics_data['ONLY_DK']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
-		// Only Polish
+		// Only Spanish
 		$statistics_data['ONLY_ES']['name'] = 'Only ES';
 		$statistics_data['ONLY_ES']['total_all'] = Word::whereNull('DK')->whereNull('PL')->count();
 		$statistics_data['ONLY_ES']['total_nouns'] = Word::whereNull('DK')->whereNull('PL')->where('type', '>', 99)->where('type', '<', 200)->count();
@@ -400,7 +401,7 @@ class WordsController extends Controller {
 		$statistics_data['ONLY_ES']['total_other'] = Word::whereNull('DK')->whereNull('PL')->where('type', '>', 399)->where('type', '<', 999)->count();
 		$statistics_data['ONLY_ES']['total_percent'] = round( $statistics_data['ONLY_ES']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
-		// Only Spanish
+		// Only Polish
 		$statistics_data['ONLY_PL']['name'] = 'Only PL';
 		$statistics_data['ONLY_PL']['total_all'] = Word::whereNull('DK')->whereNull('ES')->count();
 		$statistics_data['ONLY_PL']['total_nouns'] = Word::whereNull('DK')->whereNull('ES')->where('type', '>', 99)->where('type', '<', 200)->count();
