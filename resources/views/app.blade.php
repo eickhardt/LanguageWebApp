@@ -40,7 +40,19 @@
 				<ul class="nav navbar-nav">
 					<li>{!! link_to_route('home', 'Home') !!}</li>
 					@unless (Auth::guest()) 
-						<li>{!! link_to_route('words_path', 'Words') !!}</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Words <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li>{!! link_to_route('words_path', 'Search') !!}</li>
+								<li>{!! link_to_route('word_create_path', 'Create') !!}</li>
+								<li class="divider"></li>
+								<li>{!! link_to_route('word_wotd_path', 'Word of the day') !!}</li>
+								<li>{!! link_to_route('word_random_path', 'Random word') !!}</li>
+								<li>{!! link_to_route('word_statistics_path', 'Statistics') !!}</li>
+								<li class="divider"></li>
+								<li>{!! link_to_route('word_backup_path', 'Backup') !!}</li>
+							</ul>
+						</li>
 					@endunless
 				</ul>
 
