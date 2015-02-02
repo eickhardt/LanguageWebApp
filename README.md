@@ -27,4 +27,4 @@ As the application expands, please update the information here if it does not re
 * New: Statistics: in the Recently added words count, add a line for the total of the 3 lines :)
 
 * Fix: when I search “wpl” it doesn’t return me the words containing “wpł” (= searching for “L” doesn’t give words with “Ł “ as it should)
-* Fix:
+* Fix: the categories are wrong in the Statistic page. Words with 1xx are adjectives, words with 2xx are nouns (I think only those two are wrong, they are inversed, but just in case you can also check 3xx = verbs, 4xx = adverbs and 5xx = others)
