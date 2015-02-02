@@ -177,7 +177,11 @@ class WordsController extends Controller {
 	 */
 	public function destroy(Word $word)
 	{
-		if (Auth::user()->id > 2)
+		$user = Auth::user();
+
+		$allowed_users = ['Daniel Eickhardt', 'Gabrielle Tranchet'];
+
+		if (!in_array($user->name, $allowed_users)
 		{
 			Session::flash('error', "You don't have permission to do that.");
 			return redirect()->back();

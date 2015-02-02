@@ -14,11 +14,14 @@ class UpdateWordRequest extends Request {
 	public function authorize()
 	{
 		$user = Auth::user();
-		if ($user->id > 2)
+
+		$allowed_users = ['Daniel Eickhardt', 'Gabrielle Tranchet'];
+
+		if (in_array($user->name, $allowed_users)
 		{
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
