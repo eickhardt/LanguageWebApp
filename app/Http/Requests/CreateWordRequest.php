@@ -17,7 +17,7 @@ class CreateWordRequest extends Request {
 
 		$allowed_users = ['Daniel Eickhardt', 'Gabrielle Tranchet'];
 
-		if (in_array($user->name, $allowed_users)
+		if (in_array($user->name, $allowed_users))
 		{
 			return true;
 		}
