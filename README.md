@@ -25,7 +25,7 @@ As the application expands, please update the information here if it does not re
 * New: An optional "advanced search", if accessed the user can specify options like which type, which language, find only matching of the search word, or start by the search word, etc
 * New: Statistics: allow for search options on period of times: redraw the table for a period between two dates that can be set as parameters (between 2014-01-20 and the date of today)
 * New: Statistics: in the Recently added words count, add a line for the total of the 3 lines :)
-* New: Statistics: Add a line for the count of DK + PL + ES
+* ~~New: Statistics: Add a line for the count of DK + PL + ES~~(done)
 
 * Fix: when I search “wpl” it doesn’t return me the words containing “wpł” (= searching for “L” doesn’t give words with “Ł “ as it should)
-* Fix: the categories are wrong in the Statistic page. Words with 1xx are adjectives, words with 2xx are nouns (I think only those two are wrong, they are inversed, but just in case you can also check 3xx = verbs, 4xx = adverbs and 5xx = others)
+* ~~Fix: the categories are wrong in the Statistic page. Words with 1xx are adjectives, words with 2xx are nouns (I think only those two are wrong, they are inversed, but just in case you can also check 3xx = verbs, 4xx = adverbs and 5xx = others)~~(done)
