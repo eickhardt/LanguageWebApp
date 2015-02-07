@@ -356,6 +356,14 @@ class WordsController extends Controller {
 
 
 		// Combinations of languages
+		// Danish and Polish and Spanish
+		$statistics_data['DK_PL_ES']['name'] = 'DK + PL + ES';
+		$statistics_data['DK_PL_ES']['total_all'] = Word::where('DK', '!=', '')->where('PL', '!=', '')->where('ES', '!=', '')->count();
+		$statistics_data['DK_PL_ES']['total_adjectives'] = Word::where('DK', '!=', '')->where('PL', '!=', '')->where('ES', '!=', '')->where('type', '>', 99)->where('type', '<', 200)->count();
+		$statistics_data['DK_PL_ES']['total_nouns'] = Word::where('DK', '!=', '')->where('PL', '!=', '')->where('ES', '!=', '')->where('type', '>', 199)->where('type', '<', 300)->count();
+		$statistics_data['DK_PL_ES']['total_verbs'] = Word::where('DK', '!=', '')->where('PL', '!=', '')->where('ES', '!=', '')->where('type', '>', 299)->where('type', '<', 400)->count();
+		$statistics_data['DK_PL_ES']['total_other'] = Word::where('DK', '!=', '')->where('PL', '!=', '')->where('ES', '!=', '')->where('type', '>', 399)->where('type', '<', 999)->count();
+		$statistics_data['DK_PL_ES']['total_percent'] = round( $statistics_data['DK_PL_ES']['total_all'] / $statistics_data['total']['total_all'] * 100, 2 );
 
 		// Danish and Polish
 		$statistics_data['DK_PL']['name'] = 'DK + PL';
