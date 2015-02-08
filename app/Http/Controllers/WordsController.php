@@ -295,8 +295,8 @@ class WordsController extends Controller {
 		// Totals
 		$statistics_data['total']['name'] = 'All';
 		$statistics_data['total']['total_all'] = '';
-		$statistics_data['total']['total_nouns'] = '';
 		$statistics_data['total']['total_adjectives'] = '';
+		$statistics_data['total']['total_nouns'] = '';
 		$statistics_data['total']['total_verbs'] = '';
 		$statistics_data['total']['total_other'] = '';
 		$statistics_data['total']['total_percent'] = '';
