@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWordOfDayTable extends Migration {
+class CreateWordWotdsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,12 @@ class CreateWordOfDayTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('word_of_day', function(Blueprint $table)
+		Schema::create('word_wotds', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('word_id')->unsigned()->index();
-			$table->foreign('word_id')->references('id')->on('words_all');
 			$table->date('date');
+			$table->integer('word_meaning_id')->unsigned()->index();
+			$table->foreign('word_meaning_id')->references('id')->on('word_meanings');
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreateWordOfDayTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('word_of_day');
+		Schema::drop('word_wotds');
 	}
 
 }

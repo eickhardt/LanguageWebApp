@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder {
 		Model::unguard();
 
 		$this->call('UserTableSeeder');
-		$this->call('WordTableSeeder');
+		// $this->call('WordTableSeeder');
+		$this->call('WordLanguageTableSeeder');
+		$this->call('WordTypeTableSeeder');
+		$this->call('WordNTableSeeder');
+		$this->call('WordConvertSeeder');
 	}
 
 }

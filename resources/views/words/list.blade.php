@@ -16,6 +16,36 @@
 
 				<div class="panel-body">
 
+					<?php /* New version of dispaying words */ ?>
+					@forelse ($meanings as $meaning)
+						<ul class="list-group">
+
+							@foreach ($languages as $language)
+								<li class="list-group-item">
+									<img src="{{ $language->image }}">
+
+									<?php $count = 0; ?>
+
+									@foreach ($meaning->words as $word)
+										@if ($word->word_language_id == $language->id)
+											{{ $word->text }}
+											<?php $count++; ?>
+										@endif
+									@endforeach
+
+									<span class="badge">{{ $count }}</span>
+								</li>
+							@endforeach
+
+						</ul>
+					@empty
+						<ul class="list-group">
+							<li class="list-group-item">There seems to be nothing here.</li>
+						</ul>
+					@endforelse
+					<?php /* EO - New version of dispaying words */ ?>
+
+					<?php /*
 					@if ($list_type == 'Random word')
 						<button onclick="document.location='{{ route('word_random_path') }}'" type="submit" class="btn btn-primary">
 							<span class="glyphicon glyphicon-question-sign"></span> Random word
@@ -29,28 +59,30 @@
 									<tr class="active">
 										<th>Row</th>
 										<th>Type</th>
-										<th><img src="/img/flags/DK.png"></th>
-										<th><img src="/img/flags/EN.png"></th>
-										<th><img src="/img/flags/FR.png"></th>
-										<th><img src="/img/flags/PL.png"></th>
-										<th><img src="/img/flags/ES.png"></th>
-										<th>Time DK</th>
-										<th>Time PL</th>
-										<th>Time ES</th>
+										@foreach ($languages as $language)
+											<th><img src="{{ $language->image }}"></th>
+										@endforeach
 									</tr>
 								</thead>
-								@forelse ($words as $word)
+								@forelse ($meanings as $meaning)
 									<tr class="clickable">
-										<td onclick="document.location = '/words/{{ $word->id }}/edit'">{{ $word->id }}</td>
-										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=type'">{{ $word->type }}</td>
+										<td onclick="document.location = '/words/{{ $meaning->id }}/edit'">{{ $meaning->id }}</td>
+										<td onclick="document.location = '/words/{{ $meaning->id }}/edit?focus=type'">{{ $meaning->type }}</td>
+
+										@foreach ($meaning->words as $word)
+											<td title="{{ $word->created_at }}" onclick="document.location = '/words/{{ $word->id }}/edit?focus=DK'">{{ $word->text }}</td>
+										@endforeach
+										
+										@foreach ($languages as $language)
+											<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=DK'">{{ $word->DK }}</td>
+										@endforeach
+
 										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=DK'">{{ $word->DK }}</td>
 										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=EN'">{{ $word->EN }}</td>
 										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=FR'">{{ $word->FR }}</td>
 										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=PL'">{{ $word->PL }}</td>
 										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=ES'">{{ $word->ES }}</td>
-										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=TSDK'">{{ $word->TSDK }}</td>
-										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=TSPL'">{{ $word->TSPL }}</td>
-										<td onclick="document.location = '/words/{{ $word->id }}/edit?focus=TSES'">{{ $word->TSES }}</td>
+
 									</tr>
 								@empty
 									<tr><td colspan="10">There seems to be nothing here.</td></tr>
@@ -58,6 +90,7 @@
 							</table>
 						</div>
 					</div>
+					*/ ?>
 				</div>
 			</div>
 		</div>

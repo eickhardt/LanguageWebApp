@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Word;
-use App\WordOfDay;
+use App\WordN;
+use App\WordWotd;
 
 class HomeController extends Controller {
 
@@ -31,12 +32,10 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(Word $word)
+	public function index(WordN $word, WordWotd $wotd)
 	{
 		$wordcount = $word->count();
-
-		$word = new WordOfDay();
-		$wotd = $word->getCurrent();
+		$wotd = $wotd->getCurrent();
 		
 		return view('home', compact('wordcount', 'wotd'));
 	}

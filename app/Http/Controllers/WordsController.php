@@ -5,6 +5,9 @@ use App\Http\Requests\CreateWordRequest;
 use App\Http\Requests\UpdateWordRequest;
 use App\Http\Controllers\Controller;
 use App\Word;
+use App\WordWotd;
+use App\WordLanguage;
+use App\WordMeaning;
 use App\WordOfDay;
 use Session;
 use File;
@@ -231,11 +234,12 @@ class WordsController extends Controller {
 	 */
 	public function random()
 	{
-		$words = Word::orderByRaw("RAND()")->take(1)->get();
+		$meanings[] = WordMeaning::random();
+		$languages = WordLanguage::all();
 
 		$list_type = 'Random word';
 
-		return view('words.list', compact('words', 'list_type'));
+		return view('words.list', compact('meanings', 'list_type', 'languages'));
 	}
 
 
@@ -272,14 +276,12 @@ class WordsController extends Controller {
 	 */
 	public function wotd()
 	{
-		$words = [];
-
-		$word = new WordOfDay();
-		$words[] = $word->getcurrent();
+		$meanings[] = WordWotd::getCurrent();
+		$languages = WordLanguage::all();
 
 		$list_type = 'Word of the Day';
 
-		return view('words.list', compact('words', 'list_type'));
+		return view('words.list', compact('meanings', 'list_type', 'languages'));
 	}
 
 

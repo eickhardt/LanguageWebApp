@@ -31,4 +31,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	/**
+	 * This model soft deletes.
+	 *
+	 * @var boolean
+	 */
+	protected $softDelete = true;
+
+	/**
+	 * A user can have many UserRoles associated with it.
+	 */
+	public function roles()
+    {
+        return $this->belongsToMany('App\UserRole');
+    }
+
 }

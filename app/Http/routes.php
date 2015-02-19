@@ -26,9 +26,12 @@ get('auth/register', function() {
 	return redirect('home');
 });
 
+// get('auth', ['as' => 'password_path', 'uses' => 'Auth\PasswordController']);
+// get('auth', ['as' => 'auth_path', 'uses' => 'Auth\AuthController']);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+ 	'password' => 'Auth\PasswordController',
 ]);
 
 
