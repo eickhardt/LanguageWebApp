@@ -53,8 +53,8 @@
 									<tr class="active">
 										<th></th>
 										<th>Total</th>
-										<th>Nouns</th>
 										<th>Adjectives</th>
+										<th>Nouns</th>
 										<th>Verbs</th>
 										<th>Other</th>
 										<th>%</th>
