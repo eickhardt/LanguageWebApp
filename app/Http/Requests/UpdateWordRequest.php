@@ -41,9 +41,8 @@ class UpdateWordRequest extends Request {
 	public function rules()
 	{
 		return [
-			'type' => 'required|integer|min:100|max:999',
-			'EN' => 'required',
-			'FR' => 'required',
+			'text' => 'required',
+			'word_language_id' => 'required|integer|exists:word_languages,id',
 		];
 	}
 

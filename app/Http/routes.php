@@ -1,21 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-
 /**
  * Static guest routes
  */
-get('/', 'WelcomeController@index');
+$router->get('/', 'WelcomeController@index');
 
 $router->get('home', 
 	['as' => 'home', 'uses' => 'HomeController@index']
@@ -26,9 +14,6 @@ get('auth/register', function() {
 	return redirect('home');
 });
 
-// get('auth', ['as' => 'password_path', 'uses' => 'Auth\PasswordController']);
-// get('auth', ['as' => 'auth_path', 'uses' => 'Auth\AuthController']);
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
  	'password' => 'Auth\PasswordController',
@@ -38,9 +23,13 @@ Route::controllers([
 /**
  * Routes that require login
  */
+$router->get('search', 
+	['as' => 'search_path', 'uses' => 'HomeController@showSearch']
+);
+
 $router->bind('words', function($id) 
 {
-	return App\Word::where('id', $id)->first();
+	return App\WordN::with('language')->with('meanings')->find($id);
 });
 
 $router->resource('words', 'WordsController', [
@@ -55,26 +44,80 @@ $router->resource('words', 'WordsController', [
 	]
 ]);
 
-$router->post('words/search', 
-	['as' => 'word_search_path', 'uses' => 'WordsController@search']
+$router->get('word/{id}/restore', 
+	['as' => 'word_restore_path', 'uses' => 'WordsController@restore']
 );
 
 $router->get('word/random', 
 	['as' => 'word_random_path', 'uses' => 'WordsController@random']
 );
 
-$router->get('word/backup', 
-	['as' => 'word_backup_path', 'uses' => 'WordsController@backup']
+$router->get('word/trashed', 
+	['as' => 'words_trashed_path', 'uses' => 'WordsController@showTrashed']
 );
 
-$router->get('word/statistics', 
-	['as' => 'word_statistics_path', 'uses' => 'WordsController@statistics']
+/**
+ * Meanings resource
+ */
+$router->bind('meanings', function($id) 
+{
+	return App\WordMeaning::with('words')->with('type')->find($id);
+});
+
+$router->resource('meanings', 'MeaningsController', [
+	'names' => [
+		'index' => 'meanings_path',
+		'show' => 'meaning_path',
+		'destroy' => 'meaning_delete_path',
+		'create' => 'meaning_create_path',
+		'update' => 'meaning_update_path',
+		'edit' => 'meaning_edit_path',
+		'store' => 'meaning_store_path',
+	]
+]);
+
+$router->get('meaning/{id}/restore', 
+	['as' => 'meaning_restore_path', 'uses' => 'MeaningsController@restore']
 );
 
-$router->get('word/word_of_the_day', 
-	['as' => 'word_wotd_path', 'uses' => 'WordsController@wotd']
+$router->get('meaning/random', 
+	['as' => 'meaning_random_path', 'uses' => 'MeaningsController@random']
+);
+
+$router->get('meaning/word_of_the_day', 
+	['as' => 'meaning_wotd_path', 'uses' => 'MeaningsController@wotd']
+);
+
+$router->get('meaning/trashed', 
+	['as' => 'meanings_trashed_path', 'uses' => 'MeaningsController@showTrashed']
+);
+
+/**
+ * AJAX
+ */
+$router->post('ajax/simple_meaning', 
+	['as' => 'ajax_simple_meaning_path', 'uses' => 'MeaningsController@getSimpleMeaning']
+);
+
+$router->post('ajax/words_search', 
+	['as' => 'ajax_word_search_path', 'uses' => 'WordsController@search']
+);
+
+/**
+ * Misc
+ */
+$router->get('backup', 
+	['as' => 'backup_path', 'uses' => 'BackupController@backup']
+);
+
+$router->get('user', 
+	['as' => 'user_path', 'uses' => 'UsersController@show']
 );
 
 $router->get('user/settings', 
 	['as' => 'user_settings_path', 'uses' => 'UsersController@settings']
+);
+
+$router->get('statistics', 
+	['as' => 'statistics_path', 'uses' => 'StatisticsController@index']
 );

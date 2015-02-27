@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="http://faviconist.com/icons/f0d2338dfcaea0727d4bee45d0fadcf2/favicon.ico" />
-	<title>Training</title>
+	<title>Dictionary</title>
 
 	<!-- Bootstrap -->
 	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +24,7 @@
 	<![endif]-->
 </head>
 <body>
+	<!-- Navigation -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -33,24 +34,29 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Training</a>
+				<a class="navbar-brand" href="/">Dictionary</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li>{!! link_to_route('home', 'Home') !!}</li>
+					<li>{!! link_to_route('search_path', 'Search') !!}</li>
 					@unless (Auth::guest()) 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Words <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><b>Goto</b> <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li>{!! link_to_route('words_path', 'Search') !!}</li>
-								<li>{!! link_to_route('word_create_path', 'Create') !!}</li>
+								<li>{!! link_to_route('meaning_create_path', 'Create meaning') !!}</li>
+								<li>{!! link_to_route('word_create_path', 'Create word') !!}</li>
 								<li class="divider"></li>
-								<li>{!! link_to_route('word_wotd_path', 'Word of the day') !!}</li>
+								<li>{!! link_to_route('meaning_wotd_path', 'Word of the day') !!}</li>
+								<li>{!! link_to_route('meaning_random_path', 'Random meaning') !!}</li>
 								<li>{!! link_to_route('word_random_path', 'Random word') !!}</li>
-								<li>{!! link_to_route('word_statistics_path', 'Statistics') !!}</li>
 								<li class="divider"></li>
-								<li>{!! link_to_route('word_backup_path', 'Backup') !!}</li>
+								<li>{!! link_to_route('words_trashed_path', 'Trashed words') !!}</li>
+								<li>{!! link_to_route('meanings_trashed_path', 'Trashed meanings') !!}</li>
+								<li class="divider"></li>
+								<li class="disabled">{!! link_to_route('statistics_path', 'Statistics') !!}</li>
+								<li class="disabled">{!! link_to_route('backup_path', 'Backup') !!}</li>
 							</ul>
 						</li>
 					@endunless
@@ -59,7 +65,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="/auth/login">Login</a></li>
-						<!-- <li><a href="/auth/register">Register</a></li> -->
+						<?php /* <li><a href="/auth/register">Register</a></li> */ ?>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
@@ -74,31 +80,32 @@
 			</div>
 		</div>
 	</nav>
+	<!-- EO Navigation -->
 
-	<!-- Alerts -->
-	@if (Session::has('success'))
-		<div class="container alert-container" style="display: none;">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
+	<!-- Page -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+
+				<!-- Alerts -->
+				@if (Session::has('success'))
 					<div class="alert alert-success">
 						<strong>Voila!</strong> - {{ Session::get('success') }} <br>
 					</div>
-				</div>
-			</div>
-		</div>
-	@elseif (Session::has('error'))
-		<div class="container alert-container" style="display: none;">
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
+				@elseif (Session::has('error'))
 					<div class="alert alert-danger">
 						<strong>Oups!</strong> - {{ Session::get('error') }} <br>
 					</div>
-				</div>
+				@endif
+				<!-- EO Alerts -->
+
+				<!-- Content -->
+				@yield('content')
+				<!-- EO Content -->
 			</div>
 		</div>
-	@endif
-
-	@yield('content')
+	</div>
+	<!-- EO Page -->
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -108,22 +115,25 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$('.alert-container').slideDown();
-			$('.alert-container').on('click', function() {
+			$('.alert').slideDown();
+			$('.alert').on('click', function() 
+			{
 				$(this).slideUp();
 			});
-			$('input').on('focus', function (e) {
+			$('input').on('focus', function (e) 
+			{
 			    $(this)
-			        .one('mouseup', function () {
+			        .one('mouseup', function () 
+			        {
 			            $(this).select();
 			            return false;
-			        })
-			        .select();
+			        }).select();
 			});
 		});
 	</script>
 
 	@yield('scripts')
+	<!-- EO Scripts -->
 
 </body>
 </html>

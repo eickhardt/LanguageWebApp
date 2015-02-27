@@ -4,7 +4,8 @@ use App\Http\Requests\Request;
 use Session;
 use Auth;
 
-class CreateWordRequest extends Request {
+class UpdateMeaningRequest extends Request {
+
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,6 +25,7 @@ class CreateWordRequest extends Request {
 		return false;
 	}
 
+
 	/**
 	 * Respond accordingly if the user is not authorized.
 	 */
@@ -33,6 +35,7 @@ class CreateWordRequest extends Request {
 		return $this->redirector->back();
 	}
 
+
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -41,11 +44,12 @@ class CreateWordRequest extends Request {
 	public function rules()
 	{
 		return [
-			'text' => 'required',
-			'meaning_id' => 'required|integer|exists:word_meanings,id',
-			'word_language_id' => 'required|integer|exists:word_languages,id',
+			'real_word_type' => 'required|integer|min:100|max:999',
+			'word_type_id' => 'required|exists:word_types,id',
+			'english' => 'required',
 		];
 	}
+
 
 	/**
 	 * Get the sanitized input for the request.
@@ -56,5 +60,4 @@ class CreateWordRequest extends Request {
 	{
 		return $this->all();
 	}
-
 }

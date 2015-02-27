@@ -17,10 +17,7 @@ class CreateWordWordMeaningPivotTable extends Migration {
 			$table->increments('id');
 			$table->integer('word_id')->unsigned()->index();
 			$table->integer('word_meaning_id')->unsigned()->index();
-			// $table->foreign('word_id')->references('id')->on('words')->onDelete('cascade');
-			// $table->foreign('word_id')->references('id')->on('words')->onDelete('cascade');
-			// $table->foreign('word_meaning_id')->references('id')->on('word_meanings')->onDelete('cascade');
-			// $table->foreign('word_meaning_id')->references('id')->on('word_meanings')->onDelete('cascade');
+			$table->softDeletes();
 		});
 	}
 

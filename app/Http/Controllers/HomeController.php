@@ -1,21 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-use App\Word;
 use App\WordN;
+use App\WordLanguage;
+use App\WordType;
 use App\WordWotd;
 
 class HomeController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
 
 	/**
 	 * Create a new controller instance.
@@ -26,6 +17,7 @@ class HomeController extends Controller {
 	{
 		// $this->middleware('auth');
 	}
+
 
 	/**
 	 * Show the application dashboard to the user.
@@ -38,6 +30,21 @@ class HomeController extends Controller {
 		$wotd = $wotd->getCurrent();
 		
 		return view('home', compact('wordcount', 'wotd'));
+	}
+
+
+	/**
+	 * Show the search page.
+	 *
+	 * @param Word $word
+	 * @return View
+	 */
+	public function showSearch()
+	{
+		$languages = WordLanguage::all();
+		$types = WordType::all();
+
+		return view('search.index', compact('languages', 'types'));
 	}
 
 }

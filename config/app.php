@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'CET',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -145,8 +145,19 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+		/**
+		 * Pretty errors provider
+		 */
+		'GrahamCampbell\Exceptions\ExceptionsServiceProvider',
+
+		/**
+		 * Html class
+		 */
 		'Illuminate\Html\HtmlServiceProvider',
 
+		/**
+		 * Debugbar
+		 */
 		'Barryvdh\Debugbar\ServiceProvider',
 
 	],
