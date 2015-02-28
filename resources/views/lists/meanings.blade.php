@@ -13,7 +13,7 @@
 				@else
 					<span class="glyphicon glyphicon-list-alt"></span>
 				@endif
-				Meanings / List / <b>{{ isset($list_type) ? $list_type : ucfirst($meanings[0]->english) }}</b>
+				Meanings / List / <b>{{ isset($list_type) ? $list_type : $meanings[0]->english }}</b>
 			</h2>
 		</div>
 		<div class="panel-body">
@@ -26,7 +26,7 @@
 							<div class="col-md-6 col-md-offset-0">
 								<ul class="list-group">
 									<li class="list-group-item">
-										English: <b>{{ ucfirst($meaning->english) }}</b>
+										English: <b>{{ $meaning->english }}</b>
 									</li>
 									<li class="list-group-item">
 										Type name: <b>{{ ucfirst($meaning->type->name) }}</b>

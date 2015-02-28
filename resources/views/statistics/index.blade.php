@@ -4,7 +4,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
-				{!! link_to_route('words_path', 'Words') !!} / Statistics
+				<span class="glyphicon glyphicon-stats"></span> Statistics
 			</h2>
 		</div>
 

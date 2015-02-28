@@ -16,6 +16,17 @@ use App\WordLanguage;
 class StatisticsController extends Controller {
 
 	/**
+	 * Constructor
+	 *
+	 * @param Word $word
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
+
+	/**
 	 * Gather statistics information and display it on a page.
 	 *
 	 * @return View
@@ -23,6 +34,8 @@ class StatisticsController extends Controller {
 	public function index()
 	{
 		$languages = WordLanguage::all();
+		//dd(WordN::where(DB::raw('DATE(created_at)'), date('Y-m-d', strtotime('-1 day', time())))->count());
+
 
 		// Recently added words count
 		$days = 6;
@@ -31,9 +44,10 @@ class StatisticsController extends Controller {
 		{
 			for ($day = $days; $day >= 0; $day--) 
 			{
-				$date = date('Y-m-d', strtotime('-'.$day.' day', time()));
+				$date = date('d', strtotime('-'.$day.' day', time()));
+				// dd($date);
 				$wordcount = WordN::where('word_language_id', $language->id)
-					->where('created_at', DB::raw('DATE('.$date.')'))
+					->where(DB::raw('DAY(created_at)'), $date)
 					->count();
 				$recent_words_data[$language->name][$date] = $wordcount;
 			}
