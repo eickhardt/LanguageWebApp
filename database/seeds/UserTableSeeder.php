@@ -17,7 +17,6 @@ class UserTableSeeder extends Seeder {
     DB::table('user_roles')->delete();
 
     $admin_role = UserRole::create(['name' => 'Administrator']);
-
     UserRole::create(['name' => 'Manager']);
     UserRole::create(['name' => 'Editor']);
     UserRole::create(['name' => 'Author']);
@@ -29,30 +28,30 @@ class UserTableSeeder extends Seeder {
     
     $user = User::create(array(
       'email' => 'ddeickhardt@gmail.com',
-      'password' => Hash::make( 'Daniel6636' ),
-      'name' => 'Daniel Eickhardt',
-      'created_at' => time(),
-      'updated_at' => time()
+      'password' => Hash::make( 'asdasd' ),
+      'name' => 'Daniel Eickhardt'
     ));
     $user->roles()->attach($admin_role->id);
 
     $user = User::create(array(
       'email' => 'g.tranchet@gmail.com',
       'password' => Hash::make( 'MyLittleWoman' ),
-      'name' => 'Gabrielle Tranchet',
-      'created_at' => time(),
-      'updated_at' => time()
+      'name' => 'Gabrielle Tranchet'
     ));
     $user->roles()->attach($admin_role->id);
 
-    User::create(array(
+    $user = User::create(array(
       'email' => 'dummy@mail.com',
       'password' => Hash::make( 'dummy' ),
-      'name' => 'Dummy User',
-      'created_at' => time(),
-      'updated_at' => time()
+      'name' => 'Dummy User'
     ));
     $user->roles()->attach($std_role->id);
-  }
 
+    $user = User::create(array(
+      'email' => 'robot@mail.com',
+      'password' => Hash::make( 'robot' ),
+      'name' => 'Robot Robertson'
+    ));
+    $user->roles()->attach($admin_role->id);
+  }
 }

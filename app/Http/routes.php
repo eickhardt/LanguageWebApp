@@ -106,8 +106,12 @@ $router->post('ajax/words_search',
 /**
  * Misc
  */
-$router->get('backup', 
+$router->post('backup/do', 
 	['as' => 'backup_path', 'uses' => 'BackupController@backup']
+);
+
+$router->get('backup', 
+	['as' => 'backup_show_path', 'uses' => 'BackupController@show']
 );
 
 $router->get('user', 
