@@ -17,8 +17,6 @@ class StatisticsController extends Controller {
 
 	/**
 	 * Constructor
-	 *
-	 * @param Word $word
 	 */
 	public function __construct()
 	{
@@ -44,10 +42,10 @@ class StatisticsController extends Controller {
 		{
 			for ($day = $days; $day >= 0; $day--) 
 			{
-				$date = date('d', strtotime('-'.$day.' day', time()));
+				$date = date('Y-m-d', strtotime('-'.$day.' day', time()));
 				// dd($date);
 				$wordcount = WordN::where('word_language_id', $language->id)
-					->where(DB::raw('DAY(created_at)'), $date)
+					->where(DB::raw('DATE(created_at)'), $date)
 					->count();
 				$recent_words_data[$language->name][$date] = $wordcount;
 			}

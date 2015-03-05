@@ -89,8 +89,8 @@
 			{
 				$('#delete_word_form').submit();
 			}
-			else {
-
+			else 
+			{
 				$(this).button("enable");
 			}
 			e.preventDefault();

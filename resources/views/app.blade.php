@@ -55,8 +55,8 @@
 								<li>{!! link_to_route('words_trashed_path', 'Trashed words') !!}</li>
 								<li>{!! link_to_route('meanings_trashed_path', 'Trashed meanings') !!}</li>
 								<li class="divider"></li>
-								<li class="disabled">{!! link_to_route('statistics_path', 'Statistics') !!}</li>
-								<li class="disabled">{!! link_to_route('backup_show_path', 'Backup') !!}</li>
+								<li>{!! link_to_route('statistics_path', 'Statistics') !!}</li>
+								<li>{!! link_to_route('backup_show_path', 'Backup') !!}</li>
 							</ul>
 						</li>
 					@endunless

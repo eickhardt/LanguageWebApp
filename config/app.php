@@ -160,6 +160,11 @@ return [
 		 */
 		'Barryvdh\Debugbar\ServiceProvider',
 
+		/**
+		 * Backup package
+		 */
+		'Spatie\Backup\BackupServiceProvider',
+
 	],
 
 	/*

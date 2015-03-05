@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'App\Console\Commands\Inspire',
-		'App\Console\Commands\SelectWordOfDay',
+		'App\Console\Commands\BackupCommand',
+		'App\Console\Commands\WotdCommand',
 	];
 
 	/**

@@ -99,6 +99,5 @@ class WordConvertSeeder extends Seeder {
 			'created_at' 		=> $datetime,
 		]);
 		$meaning->words()->attach($word->id);
-		// $word->meanings()->attach($meaning->id);
 	}
 }

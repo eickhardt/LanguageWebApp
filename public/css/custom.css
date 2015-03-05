@@ -91,3 +91,11 @@ button .glyphicon {
 .navbar-brand, .navbar-nav > li > a {
 	font-weight: bold;
 }
+
+.vertical_middle > td {
+	vertical-align: middle !important;
+}
+
+.text_center {
+	text-align: center;
+}

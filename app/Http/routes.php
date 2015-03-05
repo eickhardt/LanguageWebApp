@@ -104,9 +104,17 @@ $router->post('ajax/words_search',
 );
 
 /**
- * Misc
+ * Backup
  */
-$router->post('backup/do', 
+$router->get('backup/download/{id}', 
+	['as' => 'download_backup_path', 'uses' => 'BackupController@download']
+);
+
+$router->delete('backup/delete/{id}', 
+	['as' => 'backup_delete_path', 'uses' => 'BackupController@destroy']
+);
+
+$router->get('backup/do', 
 	['as' => 'backup_path', 'uses' => 'BackupController@backup']
 );
 
@@ -114,6 +122,9 @@ $router->get('backup',
 	['as' => 'backup_show_path', 'uses' => 'BackupController@show']
 );
 
+/**
+ * Misc
+ */
 $router->get('user', 
 	['as' => 'user_path', 'uses' => 'UsersController@show']
 );
