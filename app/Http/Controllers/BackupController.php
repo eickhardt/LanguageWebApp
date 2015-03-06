@@ -61,7 +61,7 @@ class BackupController extends Controller {
 	 */
 	public function show()
 	{
-		$backups = Backup::with('user')->get();
+		$backups = Backup::with('user')->orderBy('created_at', 'DESC')->take(10)->get();
 		return view('backup.index', compact('backups'));
 	}
 
