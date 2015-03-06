@@ -19,7 +19,7 @@
 				<span class="glyphicon glyphicon-stats"></span> Statistics
 			</button>
 			<button onclick="document.location='{{ route('backup_show_path') }}'" type="submit" class="btn btn-primary">
-				<span class="glyphicon glyphicon-download"></span> Backup
+				<span class="glyphicon glyphicon-hdd"></span> Backup
 			</button>
 			<button id="advanced_search_btn" type="submit" class="btn btn-info pull-right">
 				<span class="glyphicon glyphicon-cog Search settings"></span> Search settings

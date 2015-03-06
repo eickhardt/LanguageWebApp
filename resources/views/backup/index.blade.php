@@ -12,7 +12,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-					<p>This is the page where we handle the backups. A backup is a .sql snapshot of the current state of the database. Click the button below to perform a backup, and it will appear in the list below where you may download it at your leisure.</p>
+					<p>This is the page where we handle the backups. A backup is a .sql snapshot of the current state of the database. Click the button to perform a backup, and it will appear in the list below where you may download it at your leisure.</p>
 
 					<p>Backups are also generated every night at 00:00, and saved on the server. To increase backup safety, use the backup button regularly.</p>
 
@@ -34,7 +34,7 @@
 								<thead>
 									<tr>
 										<td>File</td>
-										<td>User</td>
+										<td>Created by</td>
 										<td>Created at</td>
 										<td></td>
 									</tr>
