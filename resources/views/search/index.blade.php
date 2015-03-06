@@ -15,10 +15,10 @@
 			<button onclick="document.location='{{ route('meaning_wotd_path') }}'" type="submit" class="btn btn-primary">
 				<span class="glyphicon glyphicon-certificate"></span> Word of the Day
 			</button>
-			<button onclick="document.location='{{ route('statistics_path') }}'" type="submit" class="btn btn-primary disabled">
+			<button onclick="document.location='{{ route('statistics_path') }}'" type="submit" class="btn btn-primary">
 				<span class="glyphicon glyphicon-stats"></span> Statistics
 			</button>
-			<button onclick="document.location='{{ route('backup_path') }}'" type="submit" class="btn btn-primary disabled">
+			<button onclick="document.location='{{ route('backup_show_path') }}'" type="submit" class="btn btn-primary">
 				<span class="glyphicon glyphicon-download"></span> Backup
 			</button>
 			<button id="advanced_search_btn" type="submit" class="btn btn-info pull-right">

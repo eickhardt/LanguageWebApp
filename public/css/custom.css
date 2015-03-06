@@ -99,3 +99,7 @@ button .glyphicon {
 .text_center {
 	text-align: center;
 }
+
+body {
+	color: #777777;
+}
