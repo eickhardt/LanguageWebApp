@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Inspire',
 		'App\Console\Commands\BackupCommand',
 		'App\Console\Commands\WotdCommand',
+		'App\Console\Commands\SaveoldmwCommand',
+		'App\Console\Commands\RestoreoldmwCommand',
 	];
 
 	/**
