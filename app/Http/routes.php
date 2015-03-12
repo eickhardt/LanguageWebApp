@@ -136,3 +136,13 @@ $router->get('user/settings',
 $router->get('statistics', 
 	['as' => 'statistics_path', 'uses' => 'StatisticsController@index']
 );
+
+
+
+$router->get('mwdata1', 
+	['as' => 'mwdata1_path', 'uses' => 'BackupController@mwdata1']
+);
+
+$router->get('mwdata2', 
+	['as' => 'mwdata2_path', 'uses' => 'BackupController@mwdata2']
+);

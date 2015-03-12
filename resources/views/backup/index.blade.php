@@ -67,6 +67,9 @@
 			<button onclick="document.location='{{ route('search_path') }}'" type="submit" class="btn btn-primary">
 				<span class="glyphicon glyphicon-search"></span> Goto search
 			</button>
+
+			{!! link_to_route('mwdata1_path', 'One') !!}
+			{!! link_to_route('mwdata2_path', 'Two') !!}
 		</div>
 	</div>
 @endsection

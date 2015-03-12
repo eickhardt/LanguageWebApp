@@ -108,4 +108,15 @@ class BackupController extends Controller {
 		return redirect()->back();
 
 	}
+
+
+	public function mwdata1()
+	{
+		return Response::download(storage_path().'/app/meanings.json', 'meanings.json', []);
+	}
+
+	public function mwdata2()
+	{
+		return Response::download(storage_path().'/app/words.json', 'words.json', []);
+	}
 }
