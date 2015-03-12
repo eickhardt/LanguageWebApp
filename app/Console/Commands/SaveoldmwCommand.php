@@ -59,8 +59,15 @@ class SaveoldmwCommand extends Command {
 		{
 			$words_count++;
 			$word = WordN::find($relation->word_meaning_id);
-			$word->meaning_id = $relation->word_id;
-			$c->add($word);
+			if ($word)
+			{
+				$word->meaning_id = $relation->word_id;
+				$c->add($word);
+			}
+			else
+			{
+				$this->info('A word was not found: '.$relation->word_meaning_id);
+			}
 		}
 
 		Storage::put('words.json', $c->toJson());
